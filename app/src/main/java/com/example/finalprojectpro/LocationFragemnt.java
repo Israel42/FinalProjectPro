@@ -60,6 +60,7 @@ public class LocationFragemnt extends Fragment implements OnMapReadyCallback, Lo
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
         }
+        gmap.setMyLocationEnabled(true);
         mylocation = manager.getLastKnownLocation(provider);
         if (mylocation != null) {
             onLocationChanged(mylocation);
@@ -85,10 +86,6 @@ public class LocationFragemnt extends Fragment implements OnMapReadyCallback, Lo
     public void onLocationChanged(Location mylocation) {
         LatLng latLng = new LatLng(mylocation.getLatitude(), mylocation.getLongitude());
         gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        gmap.setMyLocationEnabled(true);
 
      }
 
