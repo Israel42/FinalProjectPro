@@ -11,6 +11,7 @@ android {
         applicationId "com.example.finalprojectpro"
         minSdkVersion 19
         targetSdkVersion 30
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
 
@@ -48,6 +49,8 @@ dependencies {
     implementation 'com.etebarian:meow-bottom-navigation:1.0.4'
     implementation 'com.github.f0ris.sweetalert:library:1.5.6'
     implementation 'jp.wasabeef:picasso-transformations:2.2.1'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
