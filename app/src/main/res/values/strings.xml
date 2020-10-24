@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FinalProjectPro</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reserved_hotel">Reserved Hotel</string>
+    <string name="duration">Duration</string>
+    <string name="qrcodedisplay">Qrcodedisplay</string>
+    <string name="choose_room_type">Choose Room Type</string>
+    <string name="how_many_rooms_do_you_want">How many rooms do you want?</string>
 </resources>

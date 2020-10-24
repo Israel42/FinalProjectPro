@@ -60,9 +60,10 @@
                 android:editable="false"
                 android:ems="10"
                 android:fontFamily="monospace"
-                android:text="WELCOME"
-                android:textAlignment="textStart"
-                android:textAllCaps="true"
+                android:text="Welcome"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#E11A237E"
                 android:textSize="36sp"
                 android:typeface="normal" />

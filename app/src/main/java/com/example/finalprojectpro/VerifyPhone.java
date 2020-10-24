@@ -90,8 +90,8 @@ public class VerifyPhone extends AppCompatActivity {
             if (code!=null){
                 /*sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
                 sweetAlertDialog.setTitle("Message Recived");
-                sweetAlertDialog.show();
-                otpTextView.setOTP(code);*/
+                sweetAlertDialog.show();*/
+                otpTextView.setOTP(code);
                 VerifyCode(code);
             }
         }

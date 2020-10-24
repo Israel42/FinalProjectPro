@@ -124,7 +124,7 @@ public class Register extends AppCompatActivity {
                         imageurl=task.toString();
                         String UID;
                         UID=auth.getCurrentUser().getUid();
-                        documentReference=firebaseFirestore.collection("USERS").document(UID);
+                        documentReference=firebaseFirestore.collection("Users").document(UID);
                         Map<String,Object> map=new HashMap<>();
                         map.put("FirstName",fname);
                         map.put("LastName",lname);
