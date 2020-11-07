@@ -6,17 +6,22 @@ public class Reservationdetail {
     String reservedhotel;
     String reservedroomtype;
     String reservednoofroom;
-    String bookingdate;
-    String paybill;
+    String indate;
+    String outdate;
+    String txn;
+    String totalprice;
 
-    public Reservationdetail(String reserver, String reserverphoneNumber, String reservedhotel, String reservedroomtype, String reservednoofroom, String bookingdate, String paybill) {
+
+    public Reservationdetail(String reserver, String reserverphoneNumber, String reservedhotel, String reservedroomtype, String reservednoofroom, String indate, String outdate, String txn, String totalprice) {
         this.reserver = reserver;
         this.reserverphoneNumber = reserverphoneNumber;
         this.reservedhotel = reservedhotel;
         this.reservedroomtype = reservedroomtype;
         this.reservednoofroom = reservednoofroom;
-        this.bookingdate = bookingdate;
-        this.paybill = paybill;
+        this.indate = indate;
+        this.outdate = outdate;
+        this.txn = txn;
+        this.totalprice = totalprice;
     }
 
     public String getReserver() {
@@ -59,19 +64,35 @@ public class Reservationdetail {
         this.reservednoofroom = reservednoofroom;
     }
 
-    public String getBookingdate() {
-        return bookingdate;
+    public String getIndate() {
+        return indate;
     }
 
-    public void setBookingdate(String bookingdate) {
-        this.bookingdate = bookingdate;
+    public void setIndate(String indate) {
+        this.indate = indate;
     }
 
-    public String getPaybill() {
-        return paybill;
+    public String getOutdate() {
+        return outdate;
     }
 
-    public void setPaybill(String paybill) {
-        this.paybill = paybill;
+    public void setOutdate(String outdate) {
+        this.outdate = outdate;
     }
+
+    public String getTxn() {
+        return txn;
+    }
+
+    public void setTxn(String txn) {
+        this.txn = txn;
+    }
+    public String getTotalprice() {
+        return totalprice;
+    }
+
+    public void setTotalprice(String totalprice) {
+        this.totalprice = totalprice;
+    }
+
 }

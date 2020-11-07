@@ -26,10 +26,10 @@ import com.squareup.picasso.Picasso;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class ProfileFragment extends Fragment {
-    EditText nameview,phoneview;
+   /* EditText nameview,phoneview;
     ImageView profilepic;
     Button logout;
-    FirebaseAuth auth;
+    FirebaseAuth auth;*/
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -40,7 +40,7 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile_view, container, false);
     }
-
+/*
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -73,5 +73,5 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(getContext(),LoginPage.class));
             }
         });
-    }
+    }*/
 }

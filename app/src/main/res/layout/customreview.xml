@@ -22,6 +22,7 @@
         android:background="#95095C59"
         android:textColor="@color/black"
         android:text="Review"
+        android:singleLine="false"
         android:textStyle="italic" />
 
     <RatingBar

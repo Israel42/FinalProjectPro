@@ -6,126 +6,186 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+   <ViewFlipper
+       android:id="@+id/viewflipper"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       android:elevation="0dp">
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <ImageView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:scaleType="fitXY"
+               android:layout_alignParentBottom="true"
+               android:layout_alignParentStart="true"
+               android:layout_alignParentEnd="true"
+               android:layout_alignParentTop="true"
+               android:background="@drawable/backgroundlogin1" />
+           <TextView
+               android:layout_width="317dp"
+               android:layout_height="157dp"
+               android:fontFamily="sans-serif-light"
+               android:layout_alignParentTop="true"
+               android:layout_alignParentStart="true"
+               android:layout_margin="30dp"
+               android:text="Find NearBy Hotels Location Via Map"
+               android:textAlignment="center"
+               android:textColor="#FFFFFF"
+               android:textSize="34sp" />
+       </RelativeLayout>
+       <RelativeLayout
+           android:id="@+id/second"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <ImageView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:scaleType="fitXY"
+               android:layout_alignParentBottom="true"
+               android:layout_alignParentStart="true"
+               android:layout_alignParentEnd="true"
+               android:layout_alignParentTop="true"
+               android:background="@drawable/backgroundlogin3"/>
+
+           <TextView
+               android:layout_width="317dp"
+               android:layout_height="157dp"
+               android:fontFamily="sans-serif-light"
+               android:layout_alignParentTop="true"
+               android:layout_alignParentStart="true"
+               android:layout_margin="40dp"
+               android:text="Help You Choose your Fitting Rooms "
+               android:textAlignment="center"
+               android:textColor="#FFFFFF"
+               android:textSize="34sp" />
+       </RelativeLayout>
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:id="@+id/third">
+           <ImageView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:scaleType="fitXY"
+               android:layout_alignParentBottom="true"
+               android:layout_alignParentStart="true"
+               android:layout_alignParentEnd="true"
+               android:layout_alignParentTop="true"
+               android:background="@drawable/backgroundlogin4"/>
+
+           <TextView
+               android:layout_width="317dp"
+               android:layout_height="157dp"
+               android:layout_alignParentEnd="true"
+               android:layout_alignParentBottom="true"
+               android:layout_margin="20dp"
+               android:fontFamily="sans-serif-light"
+               android:text="Use Our Fast Reservation System  "
+               android:textAlignment="center"
+               android:textColor="#FFFFFF"
+               android:textSize="34sp" />
+       </RelativeLayout>
+       <RelativeLayout
+           android:id="@+id/fourth"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <ImageView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:scaleType="fitXY"
+               android:layout_alignParentBottom="true"
+               android:layout_alignParentStart="true"
+               android:layout_alignParentEnd="true"
+               android:layout_alignParentTop="true"
+               android:background="@drawable/backgroundlogin2"/>
+
+           <TextView
+               android:layout_width="303dp"
+               android:layout_height="102dp"
+               android:layout_alignParentTop="true"
+               android:layout_alignParentEnd="true"
+               android:layout_margin="5dp"
+               android:layout_marginStart="40dp"
+               android:layout_marginTop="40dp"
+               android:layout_marginEnd="34dp"
+               android:layout_marginBottom="40dp"
+               android:fontFamily="sans-serif-light"
+               android:text="With Secure Payment System"
+               android:textAlignment="center"
+               android:textColor="#FCFCFF"
+               android:textSize="34sp" />
+       </RelativeLayout>
+   </ViewFlipper>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="lollipop">
-
-        <VideoView
-            android:id="@+id/videologin"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="12sp"
+        app:cardBackgroundColor="#9FFFFFFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"/>
-    </RelativeLayout>
-
-    <androidx.cardview.widget.CardView
-        android:elevation="8dp"
-        android:id="@+id/cardview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="14dp"
-        android:padding="12dp"
-        app:cardBackgroundColor="#4DFFFFFF"
-        app:cardCornerRadius="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="lollipop">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:duplicateParentState="false"
-                android:editable="false"
-                android:ems="10"
-                android:fontFamily="monospace"
-                android:text="Welcome"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textColor="#E11A237E"
-                android:textSize="36sp"
-                android:typeface="normal" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Add Your Mobile Number"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="24sp"
-                android:typeface="sans" />
-
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="14dp"
-                android:background="@drawable/edit_text_box"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <com.rilixtech.widget.countrycodepicker.CountryCodePicker
-                    android:id="@+id/countrycode"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:ems="10"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    app:ccp_textSize="19sp"
                     app:ccp_hideNameCode="true"
                     app:ccp_defaultCode="251"
-                    android:paddingTop="9dp">
-
-                </com.rilixtech.widget.countrycodepicker.CountryCodePicker>
-
+                    android:id="@+id/countrycodepicker"/>
                 <EditText
-                    android:id="@+id/phonenumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:ems="10"
-                    android:layout_marginStart="17dp"
-                    android:hint="Phone"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:inputType="phone"
-                    android:textColorHint="#131212"
-                    android:importantForAutofill="no" />
-
+                    android:id="@+id/phone"
+                    android:layout_gravity="center"
+                    android:hint="phone"/>
             </LinearLayout>
-
             <Button
-                android:id="@+id/Login"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="14dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/button_shape"
-                android:text="Login" />
-
+                android:layout_gravity="center"
+                android:text="Login"
+                android:id="@+id/loginphone"
+                android:layout_margin="12dp"
+                android:background="@drawable/button_shape"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/loginbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/button_shape"
+        android:fontFamily="sans-serif-medium"
+        android:text="Continue"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

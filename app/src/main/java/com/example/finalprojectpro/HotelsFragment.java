@@ -1,7 +1,10 @@
 package com.example.finalprojectpro;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +28,8 @@ public class HotelsFragment extends Fragment {
     RecyclerView recyclerView;
     List<Hoteldetail> hoteldetailList= new ArrayList<>();
     HoteldetailAdapter hoteldetailAdapter;
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     @Nullable
     @Override
@@ -35,18 +40,18 @@ public class HotelsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView=view.findViewById(R.id.hotelrecycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
+        database=FirebaseDatabase.getInstance();
+        recyclerView=view.findViewById(R.id.hotelsrecycler);
         hoteldetailAdapter=new HoteldetailAdapter(getContext(),hoteldetailList);
-        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-        DatabaseReference reference=firebaseDatabase.getReference().child("Hotels");
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.hasFixedSize();
+        reference=database.getReference().child("HotelDetails").child("Hotels");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 hoteldetailList.clear();
-                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-                    Hoteldetail hoteldetail=dataSnapshot.getValue(Hoteldetail.class);
+                for (DataSnapshot snapshot1:snapshot.getChildren()){
+                    Hoteldetail hoteldetail=snapshot1.getValue(Hoteldetail.class);
                     hoteldetailList.add(hoteldetail);
                 }
                 recyclerView.setAdapter(hoteldetailAdapter);

@@ -1,8 +1,12 @@
 package com.example.finalprojectpro;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +22,11 @@ import jp.wasabeef.picasso.transformations.CropSquareTransformation;
 public class RoomtypeAdapter extends RecyclerView.Adapter<RoomtypeAdapter.viewholder> {
     Context context;
     List<Roomtypegettersetter> roomtypeactivityList;
+    String hotelname;
+
+    public RoomtypeAdapter() {
+
+    }
 
     public RoomtypeAdapter(Context context, List<Roomtypegettersetter> roomtypeactivityList) {
         this.context = context;
@@ -27,29 +36,56 @@ public class RoomtypeAdapter extends RecyclerView.Adapter<RoomtypeAdapter.viewho
     @NonNull
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.customroomtype,parent,false);
+        return new viewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-    holder.roomtypeN.setText(roomtypeactivityList.get(position).getRoomtypename());
-    holder.availabelroom.setText(roomtypeactivityList.get(position).getAvailabelrooms());
-        Picasso.get().load(roomtypeactivityList.get(position).getRoompictureuri()).transform(new CropSquareTransformation()).fit().into(holder.roompicture);
+    holder.roomtype.setText(roomtypeactivityList.get(position).getRoomtypename());
+        holder.price.setText(String.format("%sETB", String.valueOf(roomtypeactivityList.get(position).getPrice())));
+        Picasso.get().load(roomtypeactivityList.get(position).getRoompictureuri()).fit().into(holder.roomimage);
+        String roomAvailable=roomtypeactivityList.get(position).availabelrooms;
+        if (roomAvailable.equalsIgnoreCase("0")){
+            holder.roomavalibilty.setText("NOT AVALIABLE AT THE MOMENT");
+            holder.roomavalibilty.setTextSize(14);
+            holder.roomavalibilty.setTextColor(Color.RED);
+        }
+        if (roomAvailable.equalsIgnoreCase("NOT AVALIABLE AT THE MOMENT")){
+            holder.book.setClickable(false);
+        }else {holder.book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String roomtypename=holder.roomtype.getText().toString();
+                String roomprice=String.valueOf(roomtypeactivityList.get(position).getPrice());
+                Intent intent=new Intent(v.getContext(),FinalPayment.class);
+                intent.putExtra("hotelpass",hotelname);
+                intent.putExtra("roompass",roomtypename);
+                intent.putExtra("pricepass",roomprice);
+                v.getContext().startActivity(intent);
+            }
+        });
+
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return roomtypeactivityList.size();
     }
 
     public class viewholder extends RecyclerView.ViewHolder{
-        TextView roomtypeN,availabelroom;
-        ImageView roompicture;
+        Button book;
+        TextView roomtype,roomavalibilty,price;
+        ImageView roomimage;
         public viewholder(@NonNull View itemView){
             super(itemView);
-            roomtypeN=itemView.findViewById(R.id.roomtypeview);
-            availabelroom=itemView.findViewById(R.id.roomsavailable);
-            roompicture=itemView.findViewById(R.id.roompicview);
+            book=itemView.findViewById(R.id.roombook);
+            roomtype=itemView.findViewById(R.id.selectedroom);
+            roomavalibilty=itemView.findViewById(R.id.Avalabile);
+            price=itemView.findViewById(R.id.priceofroom);
+            roomimage=itemView.findViewById(R.id.imageroom);
         }
 
     }

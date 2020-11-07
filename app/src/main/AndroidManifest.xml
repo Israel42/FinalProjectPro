@@ -9,20 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".Reviews"></activity>
-        <activity android:name=".Reservation" />
+        <activity android:name=".MapsActivity"></activity>
+        <activity android:name=".FinalPayment" />
+        <activity android:name=".Booking" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".Reviews" />
         <activity android:name=".Roomtypeactivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".LoginPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginPage" />
         <activity android:name=".Register" />
         <activity android:name=".VerifyPhone" />
-        <activity android:name=".WelcomePage" />
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

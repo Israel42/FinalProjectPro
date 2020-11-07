@@ -7,4 +7,6 @@
     <string name="qrcodedisplay">Qrcodedisplay</string>
     <string name="choose_room_type">Choose Room Type</string>
     <string name="how_many_rooms_do_you_want">How many rooms do you want?</string>
+    <string name="channel_name">Channel 1</string>
+    <string name="default_notification_channel_id">Channel 2</string>
 </resources>

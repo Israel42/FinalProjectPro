@@ -16,13 +16,17 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -39,7 +43,6 @@ public class Register extends AppCompatActivity {
     Button register;
     RadioGroup radioGroup;
     RadioButton radioButton;
-    VideoView videoView;
     FirebaseAuth auth;
     FirebaseFirestore firebaseFirestore;
     FirebaseStorage firebaseStorage;
@@ -49,9 +52,9 @@ public class Register extends AppCompatActivity {
     Uri imageUri;
     DocumentReference documentReference;
     public static final int PICK_IMAGE=19;
-    MediaPlayer mplayer;
     int CurrentPosition;
-
+    String token;
+    FirebaseInstanceId firebaseInstanceId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,25 +66,15 @@ public class Register extends AppCompatActivity {
         radioGroup=findViewById(R.id.radiogroup);
         register=findViewById(R.id.register);
         Profile=findViewById(R.id.profileadd);
-        videoView=findViewById(R.id.videoregister);
-        //sweetAlertDialog=new SweetAlertDialog(getApplicationContext());
-        Uri uri=Uri.parse("android.resource://"
-                +getPackageName()
-                +"/"
-                +R.raw.projectx);
-        videoView.setVideoURI(uri);
-        videoView.start();
-        videoView.setOnPreparedListener(mediaPlayer -> {
-            mplayer=mediaPlayer;
-            mplayer.setLooping(true);
-            if (CurrentPosition!=0){
-                mplayer.seekTo(CurrentPosition);
-                mplayer.start();
-            }
-        });
         auth=FirebaseAuth.getInstance();
         firebaseFirestore=FirebaseFirestore.getInstance();
         firebaseStorage=FirebaseStorage.getInstance();
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                token=task.getResult().getToken();
+            }
+        });
         Profile.setOnClickListener(view->{
             Intent intent=new Intent();
             intent.setType("image/*");
@@ -94,7 +87,7 @@ public class Register extends AppCompatActivity {
                 fname=firstname.getText().toString();
                 lname=lastname.getText().toString();
                 age=Age.getText().toString();
-                phonenumber=getIntent().getStringExtra("phone");
+                phonenumber=getIntent().getStringExtra("Phonenum");
                 int selectedid=radioGroup.getCheckedRadioButtonId();
                 radioButton=findViewById(selectedid);
                 gender=radioButton.getText().toString();
@@ -130,7 +123,11 @@ public class Register extends AppCompatActivity {
                         map.put("LastName",lname);
                         map.put("Age",age);
                         map.put("PhoneNumber",phonenumber);
-                        map.put("ImageUrl",imageurl);
+                        map.put("Gender",gender);
+                        map.put("ImageUrl",imageUri);
+                        map.put("Token",token);
+                        PrefManager prefManager=new PrefManager(getApplicationContext());
+                        prefManager.savename(fname);
                         documentReference.set(map).addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()){
                                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -146,7 +143,7 @@ public class Register extends AppCompatActivity {
                 fname=firstname.getText().toString();
                 lname=lastname.getText().toString();
                 age=Age.getText().toString();
-                phonenumber=getIntent().getStringExtra("phone");
+                phonenumber=getIntent().getStringExtra("Phonenum");
                 int selectedid=radioGroup.getCheckedRadioButtonId();
                 radioButton=findViewById(selectedid);
                 gender=radioButton.getText().toString();
@@ -170,12 +167,17 @@ public class Register extends AppCompatActivity {
                 }
                 String UID;
                 UID=auth.getCurrentUser().getUid();
-                documentReference=firebaseFirestore.collection("USERS").document(UID);
+                documentReference=firebaseFirestore.collection("Users").document(UID);
                 Map<String,Object> map=new HashMap<>();
                 map.put("FirstName",fname);
                 map.put("LastName",lname);
                 map.put("Age",age);
                 map.put("PhoneNumber",phonenumber);
+                map.put("Gender",gender);
+                map.put("ImageUrl",imageUri);
+                map.put("Token",token);
+                PrefManager prefManager=new PrefManager(getApplicationContext());
+                prefManager.savename(fname);
                 documentReference.set(map).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -208,16 +210,5 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        videoView.resume();
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        CurrentPosition=mplayer.getCurrentPosition();
-        videoView.pause();
-    }
 }

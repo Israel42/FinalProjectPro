@@ -1,6 +1,8 @@
 package com.example.finalprojectpro;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +31,6 @@ public class HoteldetailAdapter extends RecyclerView.Adapter<HoteldetailAdapter.
         this.hoteldetails = hoteldetails;
     }
 
-
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.customhoteldetail,parent,false);
@@ -38,32 +39,49 @@ public class HoteldetailAdapter extends RecyclerView.Adapter<HoteldetailAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-        holder.hotelname.setText(hoteldetails.get(position).getHotelName());
+        holder.hotelname.setText(hoteldetails.get(position).getName());
         holder.ratingBar.setRating(hoteldetails.get(position).getRating());
-        Picasso.get().load(hoteldetails.get(position).getHotelImageurl()).transform(new CropSquareTransformation()).fit().into(holder.imageView);
-
+        Picasso.get().load(hoteldetails.get(position).getImagepath()).fit().into(holder.imageView);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String passhotel=holder.hotelname.getText().toString();
+                Intent intent=new Intent(view.getContext(),Booking.class);
+                intent.putExtra("hotelpass",passhotel);
+                view.getContext().startActivity(intent);
+            }
+        });
+        holder.review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String passhotel=holder.hotelname.getText().toString();
+                Intent intent=new Intent(view.getContext(),Reviews.class);
+                intent.putExtra("hotelpass",passhotel);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return hoteldetails.size();
     }
 
 
     public class viewholder extends RecyclerView.ViewHolder{
         ImageView imageView;
         RatingBar ratingBar;
-        ImageButton imageButton;
-        Button book;
         TextView hotelname,review;
+
+
+
         public viewholder(@NonNull View itemView){
             super(itemView);
-            hotelname=itemView.findViewById(R.id.hotelname);
-            imageView=itemView.findViewById(R.id.hotelimage);
+            hotelname=itemView.findViewById(R.id.hotelname1);
+            imageView=itemView.findViewById(R.id.hotelimage1);
             ratingBar=itemView.findViewById(R.id.hotelrate);
-            imageButton=itemView.findViewById(R.id.direction);
-            book=itemView.findViewById(R.id.bookbutton);
-            review=itemView.findViewById(R.id.reviews);
+            review=itemView.findViewById(R.id.hotelreviews);
+
         }
     }
 

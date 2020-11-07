@@ -3,32 +3,34 @@ package com.example.finalprojectpro;
 import android.widget.RatingBar;
 
 public class Hoteldetail {
-    String hotelName;
-    String hotelImageurl;
-    float rating;
-    String direction;
+  String name,imagepath;
+  float rating;
+  int price;
 
-    public Hoteldetail(String hotelName, String hotelImageurl, float rating, String direction) {
-        this.hotelName = hotelName;
-        this.hotelImageurl = hotelImageurl;
+    public Hoteldetail() {
+    }
+
+    public Hoteldetail(String name, String imagepath, float rating, int price) {
+        this.name = name;
+        this.imagepath = imagepath;
         this.rating = rating;
-        this.direction = direction;
+        this.price = price;
     }
 
-    public String getHotelName() {
-        return hotelName;
+    public String getName() {
+        return name;
     }
 
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getHotelImageurl() {
-        return hotelImageurl;
+    public String getImagepath() {
+        return imagepath;
     }
 
-    public void setHotelImageurl(String hotelImageurl) {
-        this.hotelImageurl = hotelImageurl;
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
     }
 
     public float getRating() {
@@ -39,11 +41,11 @@ public class Hoteldetail {
         this.rating = rating;
     }
 
-    public String getDirection() {
-        return direction;
+    public int getPrice() {
+        return price;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

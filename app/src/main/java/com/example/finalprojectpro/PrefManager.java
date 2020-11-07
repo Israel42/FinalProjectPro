@@ -5,21 +5,24 @@ import android.content.SharedPreferences;
 
 public class PrefManager {
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     Context context;
-    private static final String FIRST_TIME="isfirst_time";
-
-    public PrefManager(Context context) {
+    public static final String SAVEDSTATE="save";
+    public static final String VALUENAMW="name";
+    public PrefManager( Context context) {
         this.context = context;
-         sharedPreferences=context.getSharedPreferences("FIRST_TIME",Context.MODE_PRIVATE);
-         editor=sharedPreferences.edit();
     }
-    public void setFirstTime(boolean isfirst_time){
-        editor.putBoolean(FIRST_TIME,isfirst_time);
+
+    public PrefManager() {
+    }
+    public void savename(String name){
+        sharedPreferences=context.getSharedPreferences(SAVEDSTATE,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString(VALUENAMW,name);
         editor.apply();
     }
-    public boolean FirstLounch(){
-        return sharedPreferences.getBoolean(FIRST_TIME,true);
+    public String getusername(){
+        sharedPreferences=context.getSharedPreferences(SAVEDSTATE,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(VALUENAMW,null);
     }
 
 }
