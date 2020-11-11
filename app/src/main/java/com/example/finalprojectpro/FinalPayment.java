@@ -83,6 +83,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // isru yanawu date cherger alebet mekenes selakaten new will try it eskeza
                 Calendar calendar = Calendar.getInstance();
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
