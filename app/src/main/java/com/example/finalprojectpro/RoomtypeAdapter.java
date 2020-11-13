@@ -28,9 +28,10 @@ public class RoomtypeAdapter extends RecyclerView.Adapter<RoomtypeAdapter.viewho
 
     }
 
-    public RoomtypeAdapter(Context context, List<Roomtypegettersetter> roomtypeactivityList) {
+    public RoomtypeAdapter(Context context, List<Roomtypegettersetter> roomtypeactivityList, String hotelname) {
         this.context = context;
         this.roomtypeactivityList = roomtypeactivityList;
+        this.hotelname = hotelname;
     }
 
     @NonNull
@@ -46,8 +47,8 @@ public class RoomtypeAdapter extends RecyclerView.Adapter<RoomtypeAdapter.viewho
     holder.roomtype.setText(roomtypeactivityList.get(position).getRoomtypename());
         holder.price.setText(String.format("%sETB", String.valueOf(roomtypeactivityList.get(position).getPrice())));
         Picasso.get().load(roomtypeactivityList.get(position).getRoompictureuri()).fit().into(holder.roomimage);
-        String roomAvailable=roomtypeactivityList.get(position).availabelrooms;
-        if (roomAvailable.equalsIgnoreCase("0")){
+        String roomAvailable=roomtypeactivityList.get(position).getAvailabelrooms();
+        if (roomAvailable.equals("0")){
             holder.roomavalibilty.setText("NOT AVALIABLE AT THE MOMENT");
             holder.roomavalibilty.setTextSize(14);
             holder.roomavalibilty.setTextColor(Color.RED);
@@ -64,12 +65,7 @@ public class RoomtypeAdapter extends RecyclerView.Adapter<RoomtypeAdapter.viewho
                 intent.putExtra("roompass",roomtypename);
                 intent.putExtra("pricepass",roomprice);
                 v.getContext().startActivity(intent);
-            }
-        });
-
-        }
-    }
-
+            }}); } }
     @Override
     public int getItemCount() {
         return roomtypeactivityList.size();
@@ -79,6 +75,7 @@ public class RoomtypeAdapter extends RecyclerView.Adapter<RoomtypeAdapter.viewho
         Button book;
         TextView roomtype,roomavalibilty,price;
         ImageView roomimage;
+
         public viewholder(@NonNull View itemView){
             super(itemView);
             book=itemView.findViewById(R.id.roombook);

@@ -48,11 +48,9 @@ public class Register extends AppCompatActivity {
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
     ImageView Profile;
-    SweetAlertDialog sweetAlertDialog;
     Uri imageUri;
     DocumentReference documentReference;
     public static final int PICK_IMAGE=19;
-    int CurrentPosition;
     String token;
     FirebaseInstanceId firebaseInstanceId;
 
@@ -79,7 +77,7 @@ public class Register extends AppCompatActivity {
             Intent intent=new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent,"SELECT_IMAGE"),PICK_IMAGE);
+            startActivityForResult(Intent.createChooser(intent,"SELECT_PROFILE_IMAGE"),PICK_IMAGE);
         });
         register.setOnClickListener(view->{
             if (imageUri!=null){
@@ -154,10 +152,10 @@ public class Register extends AppCompatActivity {
                     lastname.setFocusable(true);
                     return;
                 }
-                int ageInterd=Integer.parseInt(age);
+                int ageEnterd=Integer.parseInt(age);
                 int agemax=90;
                 int agemin=19;
-                if (ageInterd<agemin&&ageInterd>agemax){
+                if (ageEnterd < agemin && ageEnterd > agemax){
                     Age.setError("PLEASE ENTER YOUR AGE CORRECTLY");
                     Age.setFocusable(true);
                     return;
@@ -188,7 +186,6 @@ public class Register extends AppCompatActivity {
         });
     }
 
-
     protected String getFileExtension(Uri uri){
          ContentResolver cr=getContentResolver();
          MimeTypeMap mimeTypeMap=MimeTypeMap.getSingleton();
@@ -206,9 +203,6 @@ public class Register extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
-
-
 }

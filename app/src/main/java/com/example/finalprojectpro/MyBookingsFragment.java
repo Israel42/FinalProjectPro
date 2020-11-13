@@ -52,7 +52,7 @@ public class MyBookingsFragment extends Fragment {
         billnumberv=view.findViewById(R.id.bill);
         qrv=view.findViewById(R.id.newreserve);
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-       // DatabaseReference reference=firebaseDatabase.getReference()
+        //DatabaseReference reference=firebaseDatabase.getReference().child()
 
     }
 }

@@ -34,8 +34,6 @@ public class ReservaitondetailAdapter extends RecyclerView.Adapter<Reservaitonde
     holder.reserved_hotel.setText(reservationdetails.get(position).getReservedhotel());
     holder.room_type.setText(reservationdetails.get(position).getReservedroomtype());
     holder.noofrooms.setText(reservationdetails.get(position).getReservednoofroom());
-    //
-    //holder.bill_num.setText(reservationdetails.get(position).getPaybill());
     }
 
     @Override

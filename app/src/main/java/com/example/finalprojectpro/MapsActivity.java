@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -108,10 +109,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         rippleBackground=findViewById(R.id.ripple);
         lazyLoader=findViewById(R.id.lazydots);
         linearLayout=findViewById(R.id.linearmap);
-
         search=findViewById(R.id.searchbutton);
         search.setOnClickListener(this);
-
         findmylocation=findViewById(R.id.mylocation);
         hotelnameview=findViewById(R.id.hotelnameview);
         ratingBar=findViewById(R.id.ratingBarhotel2);
@@ -143,7 +142,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         map=googleMap;
         manager=(LocationManager) getSystemService(LOCATION_SERVICE);
-        //String
+        String provider=manager.getBestProvider(new Criteria(),true);
         map.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.mapstyple));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,10 +27,12 @@ import com.squareup.picasso.Picasso;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class ProfileFragment extends Fragment {
-   /* EditText nameview,phoneview;
+    TextView nameview,phoneview;
     ImageView profilepic;
     Button logout;
-    FirebaseAuth auth;*/
+    FirebaseAuth auth;
+    private DocumentSnapshot documentSnapshot;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -40,7 +43,7 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile_view, container, false);
     }
-/*
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -58,12 +61,13 @@ public class ProfileFragment extends Fragment {
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                DocumentSnapshot documentSnapshot=task.getResult();
+                documentSnapshot = task.getResult();
                 if (documentSnapshot.exists()){
-                    nameview.setText(String.format("%s %s",documentSnapshot.get("FirstName").toString(),documentSnapshot.get("LastName").toString()));
+                    nameview.setText(String.format("%s %s", documentSnapshot.get("FirstName").toString(), documentSnapshot.get("LastName").toString()));
                     phoneview.setText(documentSnapshot.get("PhoneNumber").toString());
+                    if (documentSnapshot.get("ImageUrl").toString().isEmpty()){
                     Picasso.get().load(documentSnapshot.get("ImageUrl").toString()).transform(new CropCircleTransformation()).fit().into(profilepic);
-                }
+                }}
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
@@ -73,5 +77,5 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(getContext(),LoginPage.class));
             }
         });
-    }*/
+    }
 }

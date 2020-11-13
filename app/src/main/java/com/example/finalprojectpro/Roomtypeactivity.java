@@ -32,6 +32,7 @@ public class Roomtypeactivity extends AppCompatActivity {
         setContentView(R.layout.activity_roomtypeactivity);
         hotelname=getIntent().getStringExtra("hotelpass");
         database=FirebaseDatabase.getInstance();
+        roomtypeAdapter=new RoomtypeAdapter(getApplicationContext(),roomtypegettersetters,hotelname);
         recyclerView=findViewById(R.id.roomtyperecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.hasFixedSize();
