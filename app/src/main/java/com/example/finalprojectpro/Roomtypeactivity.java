@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,9 +42,11 @@ public class Roomtypeactivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 roomtypegettersetters.clear();
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Roomtypegettersetter roomtypegettersetter = snapshot.getValue(Roomtypegettersetter.class);
+                    Roomtypegettersetter roomtypegettersetter = dataSnapshot.getValue(Roomtypegettersetter.class);
                     roomtypegettersetters.add(roomtypegettersetter);
+                    Log.d("Data","RoomTypes:"+roomtypegettersetter);
                 }
                 recyclerView.setAdapter(roomtypeAdapter);
                 roomtypeAdapter.notifyDataSetChanged();

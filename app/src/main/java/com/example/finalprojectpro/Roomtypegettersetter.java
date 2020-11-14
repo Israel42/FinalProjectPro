@@ -1,41 +1,42 @@
 package com.example.finalprojectpro;
 
 public class Roomtypegettersetter {
-    String availabelrooms,roomtypename, roompictureuri;
+    String type,imagepath;
+    int number;
     int  price;
 
     public Roomtypegettersetter() {
     }
 
-    public Roomtypegettersetter(String availabelrooms, String roomtypename, String roompictureuri, int price) {
-        this.availabelrooms = availabelrooms;
-        this.roomtypename = roomtypename;
-        this.roompictureuri = roompictureuri;
+    public Roomtypegettersetter(String type, String imagepath, int number, int price) {
+        this.type = type;
+        this.imagepath = imagepath;
+        this.number = number;
         this.price = price;
     }
 
-    public String getAvailabelrooms() {
-        return availabelrooms;
+    public String getType() {
+        return type;
     }
 
-    public void setAvailabelrooms(String availabelrooms) {
-        this.availabelrooms = availabelrooms;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getRoomtypename() {
-        return roomtypename;
+    public String getImagepath() {
+        return imagepath;
     }
 
-    public void setRoomtypename(String roomtypename) {
-        this.roomtypename = roomtypename;
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
     }
 
-    public String getRoompictureuri() {
-        return roompictureuri;
+    public int getNumber() {
+        return number;
     }
 
-    public void setRoompictureuri(String roompictureuri) {
-        this.roompictureuri = roompictureuri;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public int getPrice() {

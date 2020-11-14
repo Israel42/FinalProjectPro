@@ -7,7 +7,14 @@
     tools:context=".HomeFragment"
     android:background="@drawable/background">
 
-
+<LinearLayout
+    android:id="@+id/toper"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
     <LinearLayout
         android:id="@+id/usernamedisplay"
         android:layout_width="match_parent"
@@ -16,9 +23,7 @@
         android:orientation="vertical"
         android:layout_marginTop="30dp"
         android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        >
 
         <TextView
             android:id="@+id/username"
@@ -44,20 +49,17 @@
         android:id="@+id/wheretogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:orientation="horizontal"
         android:padding="12dp"
-        android:weightSum="2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usernamedisplay">
+        android:weightSum="2">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginStart="35dp">
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imagehotels"
@@ -79,10 +81,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="35dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginEnd="35dp">
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/location"
@@ -102,8 +104,8 @@
         </LinearLayout>
 
 
-
     </LinearLayout>
+</LinearLayout>
 
     <TextView
         android:id="@+id/textView9"
@@ -116,7 +118,8 @@
         android:textColor="#F6F3F3"
         android:textSize="21sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wheretogo" />
+
+        app:layout_constraintTop_toBottomOf="@id/toper" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout"
@@ -135,8 +138,6 @@
             android:layout_height="wrap_content"
             android:text="Hotels" />
 
-
-
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -144,8 +145,10 @@
         android:layout_height="322dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tablayout">
+        app:layout_constraintTop_toBottomOf="@id/tablayout"
+        >
 
     </androidx.viewpager.widget.ViewPager>
 </androidx.constraintlayout.widget.ConstraintLayout>

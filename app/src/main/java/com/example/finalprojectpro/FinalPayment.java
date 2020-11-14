@@ -83,7 +83,6 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // isru yanawu date cherger alebet mekenes selakaten new will try it eskeza
                 Calendar calendar = Calendar.getInstance();
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
@@ -108,6 +107,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
 
                         }
                     }, year, month, day);
+                    datePickerDialog.getDatePicker().setCalendarViewShown(false);
                     long now = System.currentTimeMillis() - 1000;
                     datePickerDialog.getDatePicker().setMinDate(now);
                     datePickerDialog.getDatePicker().setMaxDate(now + (1000 * 60 * 60 * 24 * 30));
@@ -145,7 +145,10 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                         price.setText(String.valueOf(finalprice) + "ETB");
                     }
                 }, year, month, day);
-                datePickerDialog.getDatePicker().setMinDate(cout + 24 * 60 * 60 * 1000);
+                datePickerDialog.getDatePicker().setCalendarViewShown(false);
+                long now = System.currentTimeMillis() - 1000;
+                //datePickerDialog.getDatePicker().setMinDate(cout + 24 * 60 * 60 * 1000);
+                datePickerDialog.getDatePicker().setMinDate(now + (24*60*60*1000));
                 datePickerDialog.getDatePicker().setMaxDate(cout + (1000 * 60 * 60 * 24 * 30));
                 datePickerDialog.show();
             }
@@ -158,8 +161,8 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 final Roomtypegettersetter roomtypegettersetter = snapshot.getValue(Roomtypegettersetter.class);
-                Picasso.get().load(roomtypegettersetter.getRoompictureuri()).fit().into(roompicture);
-                final int roomsizehotel = Integer.parseInt(roomtypegettersetter.getAvailabelrooms());
+                Picasso.get().load(roomtypegettersetter.getImagepath()).fit().into(roompicture);
+                final int roomsizehotel = roomtypegettersetter.getNumber();
                 hotelroomsize = Integer.parseInt(roomsize.getText().toString());
                 runOnUiThread(new Runnable() {
                     @Override
