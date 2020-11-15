@@ -39,6 +39,7 @@ import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -142,34 +143,39 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         map=googleMap;
         manager=(LocationManager) getSystemService(LOCATION_SERVICE);
-        String provider=manager.getBestProvider(new Criteria(),true);
+        //String provider=manager.getBestProvider(new Criteria(),true);
         map.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.mapstyple));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         location=manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+       // location=manager.getLastKnownLocation(provider);
         map.setMyLocationEnabled(true);
         map.getUiSettings().setMyLocationButtonEnabled(false);
         if (location!=null){
             onLocationChanged(location);
         }
-        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,10000,50,this);
+        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,50000,50,this);
+       // manager.requestLocationUpdates(provider,50000,50,this);
         CustomInfoWindow infoWindow=new CustomInfoWindow(getApplicationContext());
         map.setInfoWindowAdapter(infoWindow);
     }
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
+
         mOrigin=new LatLng(location.getLatitude(),location.getLongitude());
         userLocation=new GeoLocation(location.getLatitude(),location.getLongitude());
+        Log.d("Location:         ","UserLocation              "+mOrigin);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(mOrigin)
-                .zoom(16)
+                .zoom(5)
                 .bearing(location.getBearing())
                 .tilt(90)
                 .build();
         map.moveCamera(CameraUpdateFactory.newCameraPosition(
                 cameraPosition));
+        
     }
 
     @Override
@@ -300,11 +306,5 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 }
             });
-
-            }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
 }

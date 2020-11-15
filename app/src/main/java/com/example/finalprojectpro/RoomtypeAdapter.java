@@ -44,18 +44,12 @@ public class RoomtypeAdapter extends RecyclerView.Adapter<RoomtypeAdapter.viewho
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-    holder.roomtype.setText(roomtypeactivityList.get(position).getRoomtypename());
+    holder.roomtype.setText(roomtypeactivityList.get(position).getType());
         holder.price.setText(String.format("%sETB", String.valueOf(roomtypeactivityList.get(position).getPrice())));
-        Picasso.get().load(roomtypeactivityList.get(position).getRoompictureuri()).fit().into(holder.roomimage);
-        String roomAvailable=roomtypeactivityList.get(position).getAvailabelrooms();
-        if (roomAvailable.equals("0")){
-            holder.roomavalibilty.setText("NOT AVALIABLE AT THE MOMENT");
-            holder.roomavalibilty.setTextSize(14);
-            holder.roomavalibilty.setTextColor(Color.RED);
-        }
-        if (roomAvailable.equalsIgnoreCase("NOT AVALIABLE AT THE MOMENT")){
-            holder.book.setClickable(false);
-        }else {holder.book.setOnClickListener(new View.OnClickListener() {
+        Picasso.get().load(roomtypeactivityList.get(position).getImagepath()).fit().into(holder.roomimage);
+
+        holder.roomavalibilty.setText(String.valueOf(roomtypeactivityList.get(position).getNumber()));
+         holder.book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String roomtypename=holder.roomtype.getText().toString();
@@ -65,7 +59,7 @@ public class RoomtypeAdapter extends RecyclerView.Adapter<RoomtypeAdapter.viewho
                 intent.putExtra("roompass",roomtypename);
                 intent.putExtra("pricepass",roomprice);
                 v.getContext().startActivity(intent);
-            }}); } }
+            }});  }
     @Override
     public int getItemCount() {
         return roomtypeactivityList.size();

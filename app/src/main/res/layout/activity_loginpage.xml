@@ -165,7 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Login"
+                android:text="LogIn"
                 android:id="@+id/loginphone"
                 android:layout_margin="12dp"
                 android:background="@drawable/button_shape"/>

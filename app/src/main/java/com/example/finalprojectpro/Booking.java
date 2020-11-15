@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class Booking extends AppCompatActivity {
     ImageView imageView;
@@ -24,6 +25,7 @@ public class Booking extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference;
     String hotelintentname,pricelow,pricehigh;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class Booking extends AppCompatActivity {
                 Hoteldetail hoteldetail=snapshot.getValue(Hoteldetail.class);
                 hotelN.setText(hoteldetail.getName());
                 rate.setText(String.valueOf(hoteldetail.getRating()));
+                Picasso.get().load(hoteldetail.getImagepath()).fit().into(imageView);
                 DatabaseReference reference1=reference.child("RoomTypes");
                 DatabaseReference pricelowref=reference1.child("Single");
                 DatabaseReference pricehighref=reference1.child("Presidential");
