@@ -168,7 +168,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .bearing(location.getBearing())
                 .tilt(90)
                 .build();
-        map.animateCamera(CameraUpdateFactory.newCameraPosition(
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(
                 cameraPosition));
     }
 

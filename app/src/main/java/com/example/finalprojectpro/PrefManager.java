@@ -8,6 +8,7 @@ public class PrefManager {
     Context context;
     public static final String SAVEDSTATE="save";
     public static final String VALUENAMW="name";
+    public static final String CHOOSELANGUAGE="language";
     public PrefManager( Context context) {
         this.context = context;
     }
@@ -23,6 +24,16 @@ public class PrefManager {
     public String getusername(){
         sharedPreferences=context.getSharedPreferences(SAVEDSTATE,Context.MODE_PRIVATE);
         return sharedPreferences.getString(VALUENAMW,null);
+    }
+    public void updatelanguage(String language){
+        sharedPreferences=context.getSharedPreferences(CHOOSELANGUAGE,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("Language",language);
+        editor.apply();
+    }
+    public String getlanguage(){
+        sharedPreferences=context.getSharedPreferences(CHOOSELANGUAGE,Context.MODE_PRIVATE);
+        return sharedPreferences.getString("Language",null);
     }
 
 }
