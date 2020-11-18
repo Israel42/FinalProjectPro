@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="price"
+            android:text="@string/price"
             android:textAlignment="center"
             android:textSize="20sp"
             />

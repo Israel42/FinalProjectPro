@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Review"
+                android:text="@string/review"
                 android:textColor="@android:color/holo_blue_bright" />
         </LinearLayout>
 

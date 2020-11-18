@@ -34,7 +34,7 @@
                android:layout_alignParentTop="true"
                android:layout_alignParentStart="true"
                android:layout_margin="30dp"
-               android:text="Find NearBy Hotels Location Via Map"
+               android:text="@string/find_nearby_hotels_location_via_map"
                android:textAlignment="center"
                android:textColor="#FFFFFF"
                android:textSize="34sp" />
@@ -60,7 +60,7 @@
                android:layout_alignParentTop="true"
                android:layout_alignParentStart="true"
                android:layout_margin="40dp"
-               android:text="Help You Choose your Fitting Rooms "
+               android:text="@string/help_you_choose_your_fitting_rooms"
                android:textAlignment="center"
                android:textColor="#FFFFFF"
                android:textSize="34sp" />
@@ -86,7 +86,7 @@
                android:layout_alignParentBottom="true"
                android:layout_margin="20dp"
                android:fontFamily="sans-serif-light"
-               android:text="Use Our Fast Reservation System  "
+               android:text="@string/use_our_fast_reservation_system"
                android:textAlignment="center"
                android:textColor="#FFFFFF"
                android:textSize="34sp" />
@@ -116,7 +116,7 @@
                android:layout_marginEnd="34dp"
                android:layout_marginBottom="40dp"
                android:fontFamily="sans-serif-light"
-               android:text="With Secure Payment System"
+               android:text="@string/with_secure_payment_system"
                android:textAlignment="center"
                android:textColor="#FCFCFF"
                android:textSize="34sp" />
@@ -159,13 +159,13 @@
                     android:inputType="phone"
                     android:id="@+id/phone"
                     android:layout_gravity="center"
-                    android:hint="phone"/>
+                    android:hint="@string/phone"/>
             </LinearLayout>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="LogIn"
+                android:text="@string/login"
                 android:id="@+id/loginphone"
                 android:layout_margin="12dp"
                 android:background="@drawable/button_shape"/>

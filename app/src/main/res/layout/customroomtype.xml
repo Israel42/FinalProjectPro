@@ -45,7 +45,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="Selected Room"
                     android:textSize="20sp" />
 
                 <TextView
@@ -54,7 +53,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="price"
                     android:textSize="16sp" />
 
                 <TextView
@@ -62,8 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Avalabile"
-                    android:textColor="#6CEA76" />
+                    android:textColor="#0751D3" />
 
                 <Button
                     android:id="@+id/roombook"
@@ -74,7 +71,7 @@
                     android:layout_gravity="end"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:background="@drawable/button_background_new"
-                    android:text="Book" />
+                    android:text="@string/book" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

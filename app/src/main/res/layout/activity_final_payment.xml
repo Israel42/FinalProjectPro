@@ -60,7 +60,7 @@
                     android:layout_margin="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/box_for_date_picker"
-                    android:hint="Check in"
+                    android:hint="@string/check_in"
                     android:padding="5dp"
                     android:paddingStart="5dp"
                     android:paddingTop="5dp">
@@ -81,7 +81,7 @@
                     android:layout_margin="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/box_for_date_picker"
-                    android:hint="Checkout"
+                    android:hint="@string/checkout"
                     android:padding="5dp">
 
                     <EditText
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif-black"
-                android:text="Number Of Rooms"
+                android:text="@string/number_of_rooms"
                 android:textAlignment="center" />
 
             <LinearLayout
@@ -153,24 +153,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:fontFamily="sans-serif-black"
-                android:text="PaymentMethods"
+                android:text="@string/paymentmethods"
                 android:textAlignment="textStart"
                 android:textSize="18sp" />
 
-
-            <EditText
-                android:id="@+id/transactionid"
-                style="@style/Widget.AppCompat.AutoCompleteTextView"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/box_for_date_picker"
-                android:ems="10"
-                android:hint="TXN ID"
-                android:inputType="text"
-                android:padding="5dp"
-                android:textColorHint="#121111" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -184,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-black"
-                    android:text="Total"
+                    android:text="@string/total"
                     android:textSize="20sp" />
 
                 <TextView
@@ -206,7 +192,7 @@
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/button_shape"
-                android:text="Pay"
+                android:text="@string/pay"
                 android:textColor="#F3EFEF"
                 android:textSize="19sp" />
 

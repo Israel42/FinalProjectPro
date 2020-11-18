@@ -143,20 +143,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         map=googleMap;
         manager=(LocationManager) getSystemService(LOCATION_SERVICE);
-        //String provider=manager.getBestProvider(new Criteria(),true);
         map.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.mapstyple));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         location=manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-       // location=manager.getLastKnownLocation(provider);
         map.setMyLocationEnabled(true);
         map.getUiSettings().setMyLocationButtonEnabled(false);
         if (location!=null){
             onLocationChanged(location);
         }
         manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,50000,50,this);
-       // manager.requestLocationUpdates(provider,50000,50,this);
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(location));
         CustomInfoWindow infoWindow=new CustomInfoWindow(getApplicationContext());
         map.setInfoWindowAdapter(infoWindow);
     }
@@ -173,8 +171,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .bearing(location.getBearing())
                 .tilt(90)
                 .build();
-        map.moveCamera(CameraUpdateFactory.newCameraPosition(
-                cameraPosition));
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         
     }
 

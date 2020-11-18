@@ -44,7 +44,7 @@
                 android:id="@+id/hotelnamedetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/hotelname"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="#FFFFFF"
                 android:textSize="29sp" />
@@ -52,13 +52,12 @@
             <TextView
                 android:id="@+id/rating1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:drawableEnd="@drawable/ic_baseline_star_border_24"
                 android:drawablePadding="3dp"
-                android:text="TextView"
                 android:textColor="#FFFFFF"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                app:drawableEndCompat="@drawable/ic_baseline_star_border_24" />
 
         </LinearLayout>
     </RelativeLayout>
@@ -95,7 +94,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-condensed-medium"
-                    android:text="Per Night"
+                    android:text="@string/per_night"
                     android:textColor="#121111"
                     android:textSize="18sp" />
 
@@ -113,27 +112,22 @@
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
-
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="#050505" />
-
-
-
-
                 <TextView
                     android:id="@+id/reviews"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:drawableEnd="@drawable/ic_baseline_rate_review_24"
-                    android:text="Reviews"
+                    android:text="@string/reviews"
                     android:textAlignment="textEnd"
                     android:textColor="#145B59"
                     android:textSize="18sp"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="15dp"/>
+                    android:layout_marginEnd="15dp"
+                    app:drawableEndCompat="@drawable/ic_baseline_rate_review_24" />
 
             <View
                 android:id="@+id/view"
@@ -151,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/button_shape"
-                android:text="Select Room"
+                android:text="@string/select_room"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:layout_marginTop="80dp"/>
         </LinearLayout>

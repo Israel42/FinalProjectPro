@@ -6,17 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </RelativeLayout>
-
     <ImageView
         android:id="@+id/profileadd"
         android:layout_width="100dp"
@@ -69,7 +58,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_box"
                     android:ems="10"
-                    android:hint="FirstName"
+                    android:hint="@string/firstname"
                     android:inputType="textPersonName"
                     android:paddingStart="4dp"
                     android:textColor="#0E0D0D"
@@ -83,7 +72,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_box"
                     android:ems="10"
-                    android:hint="LastName"
+                    android:hint="@string/lastname"
                     android:inputType="textPersonName"
                     android:paddingStart="4dp"
                     android:textColor="#090909"
@@ -106,7 +95,7 @@
                     android:layout_marginTop="12dp"
                     android:background="@drawable/edit_text_box"
                     android:ems="10"
-                    android:hint="Age"
+                    android:hint="@string/age"
                     android:layout_weight="1"
                     android:inputType="number"
                     android:paddingStart="12dp"
@@ -123,7 +112,7 @@
                     android:layout_marginTop="12dp"
                     android:background="@drawable/edit_text_box"
                     android:ems="10"
-                    android:hint="Address"
+                    android:hint="@string/address"
                     android:layout_weight="2"
                     android:inputType="number"
                     android:paddingStart="12dp"
@@ -146,14 +135,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:text="Male" />
+                    android:text="@string/male" />
 
                 <RadioButton
                     android:id="@+id/female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Female" />
+                    android:text="@string/female" />
             </RadioGroup>
 
             <Button
@@ -163,7 +152,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/button_shape"
-                android:text="Register" />
+                android:text="@string/register" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

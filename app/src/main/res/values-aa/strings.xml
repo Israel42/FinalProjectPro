@@ -1,4 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FinalProjectPro</string>
+    <string name="reviews">አስተያየቶች</string>
+    <string name="select_room">ክፍል ይምረጡ</string>
+    <string name="check_in">የሚገቡበት ቀን</string>
+    <string name="checkout">የሚወጡበት ቀን</string>
+    <string name="number_of_rooms">የክፍሎች ብዛት</string>
+    <string name="paymentmethods">የክፍያ መንገድ</string>
+    <string name="total">ድምር</string>
+    <string name="pay">ይክፈሉ</string>
+    <string name="find_nearby_hotels_location_via_map">በአቅራቢያ ያሉ ሆቴሎችን በካርታ ያግኙ</string>
+    <string name="help_you_choose_your_fitting_rooms">የሚመችዎትን ክፍል ለመምረጥ ይረዳዎታል</string>
+    <string name="use_our_fast_reservation_system">ፈጣን ቦታ ማስያዣ መተግበሪያችንን ይጠቀሙ</string>
+    <string name="with_secure_payment_system">ደህንነቱ በተጠበቀ የክፍያ ስርዓት</string>
+    <string name="phone">ስልክ</string>
+    <string name="login">ግባ</string>
+    <string name="searching_nearby_hotels">በአቅራቢያዎ ያሉ ሆቴሎችን በመፈለግ ላይ</string>
+    <string name="check_availability">ቦታ ለማስያዝ</string>
+    <string name="firstname">ስም</string>
+    <string name="lastname">የአባት ስም</string>
+    <string name="age">እድሜ</string>
+    <string name="address">አድራሻ</string>
+    <string name="male">ወንድ</string>
+    <string name="female">ሴት</string>
+    <string name="register">ይመዝገቡ</string>
+    <string name="otp_has_been_sent_to_your_mobile_number_please_enter_it_below">ኦቲፒ ወደ ተንቀሳቃሽ ስልክ ቁጥርዎ ተልኳል እባክዎን ከዚህ በታች ያስገቡት</string>
+    <string name="verify_mobile_number">የሞባይል ቁጥርን ያረጋግጡ</string>
+    <string name="verify">አረጋግጥ</string>
+    <string name="price">ዋጋ</string>
+    <string name="review">አስተያየት</string>
+    <string name="book">ቦታ ለማስያዝ</string>
+    <string name="lets_discover_new_places">አዳዲስ ቦታዎችን እንፈልግ!</string>
+    <string name="location">ካርታ</string>
+    <string name="your_recent_visits">የቅርብ ጊዜ ጉብኝቶችዎ</string>
+    <string name="hotels">ሆቴሎች</string>
+    <string name="log_out">ውጣ</string>
+    <string name="per_night">በአንድ ሌሊት</string>
+    <string name="how_many_rooms_do_you_want">ምን ያህል ክፍል ይፈልጋሉ?</string>
+    <string name="choose_room_type">የክፍል አይነት ይምረጡ</string>
+    <string name="duration">የቆይታ ጊዜ</string>
+    <string name="reserved_hotel">የተያዘው ሆቴል</string>
 </resources>

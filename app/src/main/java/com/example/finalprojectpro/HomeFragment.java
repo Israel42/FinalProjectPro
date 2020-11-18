@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +64,11 @@ public class HomeFragment extends Fragment {
         hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            Fragment fragment=new HotelsFragment();
+            FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.layout.fragment_home,fragment);
+                fragmentTransaction.commit();
             }
         });
         location.setOnClickListener(new View.OnClickListener() {

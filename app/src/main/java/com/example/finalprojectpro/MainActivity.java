@@ -54,6 +54,4 @@ public class MainActivity extends BaseActivity {
         });
 
     }
-   // public checkAvailability(Date checkin,Date checkout){
-    //    return true;}
 }

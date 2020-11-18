@@ -107,12 +107,10 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
 
                         }
                     }, year, month, day);
-                    datePickerDialog.getDatePicker().setCalendarViewShown(false);
                     long now = System.currentTimeMillis() - 1000;
                     datePickerDialog.getDatePicker().setMinDate(now);
                     datePickerDialog.getDatePicker().setMaxDate(now + (1000 * 60 * 60 * 24 * 30));
                     datePickerDialog.show();
-
                 }
             }
         });
@@ -122,7 +120,6 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
-
             @Override
             public void onClick(View v) {
                 datePickerDialog = new DatePickerDialog(FinalPayment.this, new DatePickerDialog.OnDateSetListener() {
@@ -145,10 +142,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                         price.setText(String.valueOf(finalprice) + "ETB");
                     }
                 }, year, month, day);
-                datePickerDialog.getDatePicker().setCalendarViewShown(false);
-                long now = System.currentTimeMillis() - 1000;
-                //datePickerDialog.getDatePicker().setMinDate(cout + 24 * 60 * 60 * 1000);
-                datePickerDialog.getDatePicker().setMinDate(now + (24*60*60*1000));
+                datePickerDialog.getDatePicker().setMinDate(cout + 24 * 60 * 60 * 1000);
                 datePickerDialog.getDatePicker().setMaxDate(cout + (1000 * 60 * 60 * 24 * 30));
                 datePickerDialog.show();
             }

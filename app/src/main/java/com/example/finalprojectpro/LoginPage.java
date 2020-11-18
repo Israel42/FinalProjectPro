@@ -1,6 +1,8 @@
 package com.example.finalprojectpro;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ public class LoginPage extends AppCompatActivity {
     String phonenumber;
     ViewFlipper flipper;
     FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

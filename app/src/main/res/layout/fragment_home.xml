@@ -12,13 +12,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_marginTop="40dp"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent">
     <LinearLayout
         android:id="@+id/usernamedisplay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
         android:layout_marginTop="30dp"
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="Lets discover new Places!"
+            android:text="@string/lets_discover_new_places"
             android:textColor="#B9F3EDED"
             android:textSize="17sp" />
     </LinearLayout>
@@ -54,6 +55,7 @@
         android:weightSum="2">
 
         <LinearLayout
+            android:id="@+id/content_vi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="35dp"
@@ -74,7 +76,7 @@
                 android:id="@+id/hotels"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hotels"
+                android:text="@string/hotels"
                 android:textColor="#E3D9D9" />
         </LinearLayout>
 
@@ -99,7 +101,7 @@
                 android:id="@+id/places"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location"
+                android:text="@string/location"
                 android:textColor="#FAF6F6" />
         </LinearLayout>
 
@@ -114,11 +116,10 @@
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:padding="10dp"
-        android:text="Your Recent Vists"
+        android:text="@string/your_recent_visits"
         android:textColor="#F6F3F3"
         android:textSize="21sp"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@id/toper" />
 
     <com.google.android.material.tabs.TabLayout
@@ -136,7 +137,7 @@
             android:id="@+id/recenthotels"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hotels" />
+            android:text="@string/hotels" />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -149,7 +150,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tablayout"
         >
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/visitedhotels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
+    </androidx.recyclerview.widget.RecyclerView>
     </androidx.viewpager.widget.ViewPager>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

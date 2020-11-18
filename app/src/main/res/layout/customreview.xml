@@ -12,17 +12,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:paddingStart="10dp"
-        android:text="Reviewer" />
+        />
 
     <TextView
         android:id="@+id/review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:background="#95095C59"
-        android:textColor="@color/black"
-        android:text="Review"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
         android:singleLine="false"
+        android:textColor="@color/black"
         android:textStyle="italic" />
 
     <RatingBar
