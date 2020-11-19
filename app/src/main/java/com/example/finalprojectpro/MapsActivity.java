@@ -154,7 +154,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             onLocationChanged(location);
         }
         manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,50000,50,this);
-        map.moveCamera(CameraUpdateFactory.newCameraPosition(location));
         CustomInfoWindow infoWindow=new CustomInfoWindow(getApplicationContext());
         map.setInfoWindowAdapter(infoWindow);
     }
@@ -167,7 +166,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d("Location:         ","UserLocation              "+mOrigin);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(mOrigin)
-                .zoom(5)
+                .zoom(15)
                 .bearing(location.getBearing())
                 .tilt(90)
                 .build();

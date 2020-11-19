@@ -1,45 +1,60 @@
 package com.example.finalprojectpro;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.preference.PreferenceManager;
+import android.view.View;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
-public class SplashScreen extends AppCompatActivity {
-    Long ms=0,splashtime=4000;// time new yeha isru mechemr mekenese techelale
-    Boolean pause=true;
-    Boolean splashActivity=true;
-    Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-            .getBoolean("isFirstRun", true);
+import com.google.android.material.snackbar.Snackbar;
 
+public class SplashScreen extends AppCompatActivity {
+    long ms=0;
+    long splashtime=4000;
+    boolean pause=true;
+    boolean splashActivity=true;
+
+   ConstraintLayout constraintLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        Thread thread=new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                try {
-                   while (splashActivity&&ms<splashtime){
-                       if (!pause){
-                           ms+=100;
-                           sleep(100);
-                       }
-                   }
-                }catch (e:Exception){
-                }
-                finally{
-                    if (isFirstRun){
-                        firstlounch();
-                    }else {
-                        Intent intent=new Intent(SplashScreen.this,LoginPage.class);
-                        startActivity(intent);
-                    }
-                }thread.start();
-                }
-            }
+        constraintLayout=findViewById(R.id.cs);
+        boolean isFirstRun = getSharedPreferences("PREFERENCE",MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+          Thread thread=new Thread(){
+              @Override
+              public void run() {
+                  try {
+                      Thread.sleep(4000);
+                  }catch (Exception e){
+                        e.printStackTrace();
+                  }finally {
+                      if (!isOnline()){
+                          Snackbar snackbar=Snackbar.make(constraintLayout,"NO INTERNET CONNECTION",Snackbar.LENGTH_INDEFINITE);
+                          snackbar.setAction("Retry", new View.OnClickListener() {
+                              @Override
+                              public void onClick(View view) {
+                               recreate();
+                              }
+                          });
+                          snackbar.show();
+                      }else if(isFirstRun){
+                          firstlounch();
+                      }else{
+                          Intent intent=new Intent(SplashScreen.this,LoginPage.class);
+                          startActivity(intent);
+                          finish();
+                      }
+                  }
+              }
+          };
+         thread.start();
         }
         public void firstlounch(){
         Intent intent=new Intent(SplashScreen.this,Language_selection.class);
@@ -50,5 +65,8 @@ public class SplashScreen extends AppCompatActivity {
             edit.apply();
 
         }
-
+        public boolean isOnline(){
+            ConnectivityManager connectivityManager= (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            return connectivityManager.getActiveNetworkInfo()!=null&&connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
+        }
 }

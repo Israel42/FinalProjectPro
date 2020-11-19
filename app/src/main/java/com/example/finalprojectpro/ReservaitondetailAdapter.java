@@ -47,12 +47,12 @@ public class ReservaitondetailAdapter extends RecyclerView.Adapter<Reservaitonde
         public viewholder(View itemView){
             super(itemView);
         user_Name=itemView.findViewById(R.id.username);
-        phone_num=itemView.findViewById(R.id.phone_N);
+      /*  phone_num=itemView.findViewById(R.id.phone_N);
         reserved_hotel=itemView.findViewById(R.id.hotel_names);
         room_type=itemView.findViewById(R.id.room_type);
         noofrooms=itemView.findViewById(R.id.numberofrooms);
         duration=itemView.findViewById(R.id.reserveduration);
-        bill_num=itemView.findViewById(R.id.bill);
+        bill_num=itemView.findViewById(R.id.bill);*/
         }
 
     }

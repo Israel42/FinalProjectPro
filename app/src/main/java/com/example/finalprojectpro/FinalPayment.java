@@ -70,7 +70,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
         checkout = findViewById(R.id.checkout);
         checkin = findViewById(R.id.checkin);
         roomsize = findViewById(R.id.numberofrooms);
-        transactionid = findViewById(R.id.transactionid);
+       // transactionid = findViewById(R.id.transactionid);
         plus = findViewById(R.id.plus);
         minus = findViewById(R.id.minus);
         pay = findViewById(R.id.Pay);
@@ -264,8 +264,8 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                                 String Uid = auth.getCurrentUser().getUid();
                                 myreservation.child(Uid).push().setValue(reservationdetail);
                                 DatabaseReference transaction_id = database.getReference().child("transactionid");
-                                TransactionDetail detail = new TransactionDetail(Transaction);
-                                transaction_id.push().setValue(detail);
+                            //    TransactionDetail detail = new TransactionDetail(Transaction);
+                              //  transaction_id.push().setValue(detail);
                                 startActivity(new Intent(getApplicationContext(), HotelsFragment.class));
                                 finish();
                             }

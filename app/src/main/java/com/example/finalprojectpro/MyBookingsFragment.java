@@ -44,12 +44,13 @@ public class MyBookingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         reserve=view.findViewById(R.id.reservehistory);
         namev=view.findViewById(R.id.username);
-        phonev=view.findViewById(R.id.phone_N);
+       /* phonev=view.findViewById(R.id.phone_N);
         hotelv=view.findViewById(R.id.hotel_names);
         roomtypev=view.findViewById(R.id.room_type);
         numberofroomsv=view.findViewById(R.id.numberofrooms);
         durationv=view.findViewById(R.id.reserveduration);
         billnumberv=view.findViewById(R.id.bill);
+        */
         qrv=view.findViewById(R.id.newreserve);
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
         //DatabaseReference reference=firebaseDatabase.getReference().child()
