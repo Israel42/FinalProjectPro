@@ -65,7 +65,7 @@ public class ProfileFragment extends Fragment {
                 if (documentSnapshot.exists()){
                     nameview.setText(String.format("%s %s", documentSnapshot.get("FirstName").toString(), documentSnapshot.get("LastName").toString()));
                     phoneview.setText(documentSnapshot.get("PhoneNumber").toString());
-                    if (documentSnapshot.get("ImageUrl").toString().isEmpty()){
+                    if (!documentSnapshot.get("ImageUrl").toString().isEmpty()){
                     Picasso.get().load(documentSnapshot.get("ImageUrl").toString()).transform(new CropCircleTransformation()).fit().into(profilepic);
                 }}
             }

@@ -22,6 +22,7 @@ public class Language_selection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language_selection);
         languageselection=findViewById(R.id.languageradiogroup);
+        next=findViewById(R.id.next);
         languageselection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -30,22 +31,19 @@ public class Language_selection extends AppCompatActivity {
                     switch (i){
                         case R.id.amharic:
                             locale=new Locale("aa");
-                            language.setChecked(true);
-                            Locale.setDefault(locale);
-                            Configuration configuration = new Configuration();
-                            configuration.locale = locale;
-                            getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
-                            recreate();
+                            Languagesetting();
+
                             break;
                         case R.id.english:
-                            language.setChecked(true);
+                            Languagesetting();
                             break;
                         default:
+                            break;
                     }
                 }
             }
         });
-/*        next.setOnClickListener(new View.OnClickListener() {
+       next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(Language_selection.this,LoginPage.class);
@@ -54,6 +52,13 @@ public class Language_selection extends AppCompatActivity {
             }
         });
 
- */
+
+    }
+    public void Languagesetting(){
+        language.setChecked(true);
+        Configuration configuration=new Configuration();
+        configuration.locale=locale;
+        getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
+
     }
 }

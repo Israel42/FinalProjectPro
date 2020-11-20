@@ -166,7 +166,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d("Location:         ","UserLocation              "+mOrigin);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(mOrigin)
-                .zoom(15)
+                .zoom(5)
                 .bearing(location.getBearing())
                 .tilt(90)
                 .build();

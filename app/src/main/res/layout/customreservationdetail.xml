@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="#000000">
+        app:cardBackgroundColor="#B982C8">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                     android:layout_gravity="end"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
-
+                    android:layout_marginBottom="15dp"
                     android:textSize="19dp"
                     android:text="Details"
                     android:textStyle="bold" />

@@ -33,7 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeFragment extends Fragment {
     TextView username;
-    ImageView hotel,location;
+    ImageView location;
     Animation slide;
     TabLayout tab;
     public static final int PERMISSION_CODE=99;
@@ -53,7 +53,6 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         slide = AnimationUtils.loadAnimation(getContext(), R.anim.slide);
         username = view.findViewById(R.id.username);
-        hotel = view.findViewById(R.id.imagehotels);
         location = view.findViewById(R.id.location);
         tab = view.findViewById(R.id.tablayout);
         username.setAnimation(slide);
@@ -61,16 +60,6 @@ public class HomeFragment extends Fragment {
                 ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             CheckPermission();
         }
-        hotel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            Fragment fragment=new HotelsFragment();
-            FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.layout.fragment_home,fragment);
-                fragmentTransaction.commit();
-            }
-        });
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
