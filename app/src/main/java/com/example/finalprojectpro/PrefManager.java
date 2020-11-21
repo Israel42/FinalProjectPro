@@ -31,9 +31,6 @@ public class PrefManager {
         editor.putString("Language",language);
         editor.apply();
     }
-    public String getlanguage(){
-        sharedPreferences=context.getSharedPreferences(CHOOSELANGUAGE,Context.MODE_PRIVATE);
-        return sharedPreferences.getString("Language",null);
-    }
+
 
 }

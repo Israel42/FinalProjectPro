@@ -30,15 +30,18 @@ public class Language_selection extends AppCompatActivity {
                 if (language!=null){
                     switch (i){
                         case R.id.amharic:
-                            locale=new Locale("aa");
-                            Languagesetting();
+                       PrefManager prefManager=new PrefManager(getApplicationContext());
+                        String language="aa";
+                        prefManager.updatelanguage(language);
 
                             break;
                         case R.id.english:
-                            Languagesetting();
+                            PrefManager prefManager1=new PrefManager(getApplicationContext());
+                            String language2="en";
+                            prefManager1.updatelanguage(language2);
                             break;
                         default:
-                            break;
+
                     }
                 }
             }
