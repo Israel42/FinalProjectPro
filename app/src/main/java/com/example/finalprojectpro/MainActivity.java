@@ -13,7 +13,7 @@ import java.util.Date;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
   MeowBottomNavigation bottomNavigation;
 
 
