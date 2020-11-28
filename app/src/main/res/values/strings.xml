@@ -18,7 +18,7 @@
     <string name="number_of_rooms">Number Of Rooms</string>
     <string name="paymentmethods">PaymentMethods</string>
     <string name="total">Total</string>
-    <string name="pay">Pay</string>
+    <string name="finish">Finish</string>
     <string name="find_nearby_hotels_location_via_map">Find NearBy Hotels Location Via Map</string>
     <string name="help_you_choose_your_fitting_rooms">Help You Choose your Fitting Rooms</string>
     <string name="use_our_fast_reservation_system">Use Our Fast Reservation System</string>
@@ -45,4 +45,5 @@
     <string name="your_recent_visits">Your Recent Visits</string>
     <string name="hotels">Hotels</string>
     <string name="log_out">Log out</string>
+    <string name="details">Details</string>
 </resources>

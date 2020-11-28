@@ -47,7 +47,6 @@ public class RoomtypeAdapter extends RecyclerView.Adapter<RoomtypeAdapter.viewho
     holder.roomtype.setText(roomtypeactivityList.get(position).getType());
         holder.price.setText(String.format("%sETB", String.valueOf(roomtypeactivityList.get(position).getPrice())));
         Picasso.get().load(roomtypeactivityList.get(position).getImagepath()).fit().into(holder.roomimage);
-
         holder.roomavalibilty.setText(String.valueOf(roomtypeactivityList.get(position).getNumber()));
          holder.book.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +77,5 @@ public class RoomtypeAdapter extends RecyclerView.Adapter<RoomtypeAdapter.viewho
             price=itemView.findViewById(R.id.priceofroom);
             roomimage=itemView.findViewById(R.id.imageroom);
         }
-
     }
 }

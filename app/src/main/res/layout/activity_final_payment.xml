@@ -151,17 +151,53 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif-black"
                 android:text="@string/paymentmethods"
                 android:textAlignment="textStart"
                 android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:id="@+id/cbelogo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/cbe"
+                    />
+                <ImageView
+                    android:id="@+id/birhanlogo"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:background="@drawable/birhan"/>
+                <ImageView
+                    android:id="@+id/amolelogo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/amole"
+                    />
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/generated"
+
+                />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -192,11 +228,12 @@
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/button_shape"
-                android:text="@string/pay"
+                android:text="@string/finish"
                 android:textColor="#F3EFEF"
                 android:textSize="19sp" />
 
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

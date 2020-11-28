@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Roomtypeactivity">
+    tools:context=".Roomtypeactivity"
+    android:paddingBottom="60dp">
 
     <TextView
         android:id="@+id/chooseroomtype"
@@ -29,6 +30,7 @@
       android:paddingTop="10dp"
       android:paddingStart="5dp"
       android:paddingEnd="5dp"
+      android:paddingBottom="10dp"
       />
 
 

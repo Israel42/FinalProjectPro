@@ -143,7 +143,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         map=googleMap;
         manager=(LocationManager) getSystemService(LOCATION_SERVICE);
-        map.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,R.raw.mapstyple));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -153,7 +152,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (location!=null){
             onLocationChanged(location);
         }
-        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,50000,50,this);
+        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,10000,3,this);
         CustomInfoWindow infoWindow=new CustomInfoWindow(getApplicationContext());
         map.setInfoWindowAdapter(infoWindow);
     }
@@ -163,10 +162,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mOrigin=new LatLng(location.getLatitude(),location.getLongitude());
         userLocation=new GeoLocation(location.getLatitude(),location.getLongitude());
-        Log.d("Location:         ","UserLocation              "+mOrigin);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(mOrigin)
-                .zoom(5)
+                .zoom(15)
                 .bearing(location.getBearing())
                 .tilt(90)
                 .build();

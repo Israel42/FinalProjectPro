@@ -34,13 +34,11 @@ public class ProfileFragment extends Fragment {
     private DocumentSnapshot documentSnapshot;
 
     public ProfileFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile_view, container, false);
     }
 
@@ -65,9 +63,9 @@ public class ProfileFragment extends Fragment {
                 if (documentSnapshot.exists()){
                     nameview.setText(String.format("%s %s", documentSnapshot.get("FirstName").toString(), documentSnapshot.get("LastName").toString()));
                     phoneview.setText(documentSnapshot.get("PhoneNumber").toString());
-                    if (!documentSnapshot.get("ImageUrl").toString().isEmpty()){
+                    /*if (!documentSnapshot.get("ImageUrl").toString().isEmpty()){
                     Picasso.get().load(documentSnapshot.get("ImageUrl").toString()).transform(new CropCircleTransformation()).fit().into(profilepic);
-                }}
+                }*/}
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {

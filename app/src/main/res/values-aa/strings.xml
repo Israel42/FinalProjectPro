@@ -8,7 +8,6 @@
     <string name="number_of_rooms">የክፍሎች ብዛት</string>
     <string name="paymentmethods">የክፍያ መንገድ</string>
     <string name="total">ድምር</string>
-    <string name="pay">ይክፈሉ</string>
     <string name="find_nearby_hotels_location_via_map">በአቅራቢያ ያሉ ሆቴሎችን በካርታ ያግኙ</string>
     <string name="help_you_choose_your_fitting_rooms">የሚመችዎትን ክፍል ለመምረጥ ይረዳዎታል</string>
     <string name="use_our_fast_reservation_system">ፈጣን ቦታ ማስያዣ መተግበሪያችንን ይጠቀሙ</string>
@@ -40,4 +39,6 @@
     <string name="choose_room_type">የክፍል አይነት ይምረጡ</string>
     <string name="duration">የቆይታ ጊዜ</string>
     <string name="reserved_hotel">የተያዘው ሆቴል</string>
+    <string name="details">Details</string>
+    <string name="finish">ጨርስ</string>
 </resources>

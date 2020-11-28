@@ -17,8 +17,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="#B982C8">
-
+        >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/reservationdetailbackground">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -44,11 +47,8 @@
                     android:textSize="22sp"
                     android:gravity="center"
                     />
-
-
-
             <TextView
-                    android:id="@+id/newreserve"
+                    android:id="@+id/detailreserv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -56,10 +56,11 @@
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="15dp"
                     android:textSize="19dp"
-                    android:text="Details"
+                    android:text="@string/details"
                     android:textStyle="bold" />
 
 
         </LinearLayout>
+    </ImageView>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,10 +47,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class FinalPayment extends AppCompatActivity implements View.OnClickListener {
-    EditText checkin, checkout, transactionid;
-    TextView price, roomsize;
+    EditText checkin, checkout;
+    TextView price, roomsize, generatedcode;
     Button plus, minus, pay;
-    ImageView roompicture;
+    ImageView roompicture, cbelogo, amolelogo, birhanlogo;
     DatePickerDialog datePickerDialog;
     DatePicker datePicker;
     DatabaseReference reference;
@@ -58,9 +58,9 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
     int hotelroomsize, currentprice;
     Calendar calendar1, calendar2;
     String selectedhotelname, name, phone, checkinroom, checkoutroom, trans, numberofroom, tp;
-    String Key, roomtypename, date1, date2;
     Date checkindate, checkoutdate;
     String checkTrasanction = null;
+    String Key, roomtypename, date1, date2, randomcode;
     long cout;
 
     @Override
@@ -70,9 +70,12 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
         checkout = findViewById(R.id.checkout);
         checkin = findViewById(R.id.checkin);
         roomsize = findViewById(R.id.numberofrooms);
-       // transactionid = findViewById(R.id.transactionid);
         plus = findViewById(R.id.plus);
         minus = findViewById(R.id.minus);
+        generatedcode = findViewById(R.id.generated);
+        cbelogo = findViewById(R.id.cbelogo);
+        birhanlogo = findViewById(R.id.birhanlogo);
+        amolelogo = findViewById(R.id.amolelogo);
         pay = findViewById(R.id.Pay);
         roompicture = findViewById(R.id.imageofroom);
         price = findViewById(R.id.totalsum);
@@ -92,7 +95,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                         @SuppressLint("DefaultLocale")
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                            checkin.setText(String.format("%d/%d/%d", dayOfMonth, month, year));
+                            checkin.setText(String.format("%d/%d/%d", dayOfMonth, month+1, year));
                             date1 = checkin.getText().toString();
                             price.invalidate();
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -107,9 +110,9 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
 
                         }
                     }, year, month, day);
-                    long now = System.currentTimeMillis() - 1000;
+                    long now = System.currentTimeMillis();
                     datePickerDialog.getDatePicker().setMinDate(now);
-                    datePickerDialog.getDatePicker().setMaxDate(now + (1000 * 60 * 60 * 24 * 30));
+                    datePickerDialog.getDatePicker().setMaxDate(now + (1000 * 60 * 60 * 24 * 7));
                     datePickerDialog.show();
                 }
             }
@@ -120,13 +123,14 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
+
             @Override
             public void onClick(View v) {
                 datePickerDialog = new DatePickerDialog(FinalPayment.this, new DatePickerDialog.OnDateSetListener() {
                     @SuppressLint("DefaultLocale")
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        checkout.setText(String.format("%d/%d/%d", dayOfMonth, month, year));
+                        checkout.setText(String.format("%d/%d/%d", dayOfMonth, month+1, year));
                         date2 = checkout.getText().toString();
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         try {
@@ -142,8 +146,8 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                         price.setText(String.valueOf(finalprice) + "ETB");
                     }
                 }, year, month, day);
-                datePickerDialog.getDatePicker().setMinDate(cout + 24 * 60 * 60 * 1000);
-                datePickerDialog.getDatePicker().setMaxDate(cout + (1000 * 60 * 60 * 24 * 30));
+                datePickerDialog.getDatePicker().setMinDate(cout + (1000 * 60 * 60 * 24));
+                datePickerDialog.getDatePicker().setMaxDate(cout + (1000 * 60 * 60 * 24 * 7));
                 datePickerDialog.show();
             }
         });
@@ -209,17 +213,12 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
     @Override
     public void onClick(View v) {
-        final String Transaction = transactionid.getText().toString();
         checkinroom = checkin.getText().toString();
         checkoutroom = checkout.getText().toString();
         numberofroom = roomsize.getText().toString();
-        if (Transaction.isEmpty()) {
-            transactionid.setError("Please add txn id");
-            transactionid.setFocusable(true);
-            return;
-        }
         if (checkinroom.isEmpty()) {
             checkin.setError("Please add check in date");
             checkin.setFocusable(true);
@@ -230,53 +229,33 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
             checkout.setFocusable(true);
             return;
         }
-        final DatabaseReference databaseReference = database.getReference().child("transactionid");
-        Query query = databaseReference.orderByChild("transaction").equalTo(Transaction);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        selectedhotelname = getIntent().getStringExtra("hotelpass");
+        roomtypename = getIntent().getStringExtra("roompass");
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String UID = auth.getCurrentUser().getUid();
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Users").document(UID);
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    Toast.makeText(FinalPayment.this, "Used transaction, please enter new transaction id", Toast.LENGTH_SHORT).show();
-                } else {
-                    selectedhotelname = getIntent().getStringExtra("hotelpass");
-                    roomtypename = getIntent().getStringExtra("roompass");
-
-
-                    FirebaseAuth auth = FirebaseAuth.getInstance();
-                    String UID = auth.getCurrentUser().getUid();
-                    DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Users").document(UID);
-                    documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot documentSnapshot = task.getResult();
-                                name = documentSnapshot.get("FirstName").toString() + " " + documentSnapshot.get("LastName").toString();
-                                phone = documentSnapshot.get("Phone").toString();
-                                checkinroom = checkin.getText().toString();
-                                checkoutroom = checkout.getText().toString();
-                                tp = price.getText().toString();
-                                numberofroom = roomsize.getText().toString();
-                                Reservationdetail reservationdetail = new Reservationdetail(name, phone, selectedhotelname, roomtypename, numberofroom, checkinroom, checkoutroom, Transaction, tp);
-                                DatabaseReference databaseReference2 = database.getReference().child("HotelDetails").child("Hotels").child(selectedhotelname).child("Reserved");
-                                databaseReference2.child(name).push().setValue(reservationdetail);
-                                DatabaseReference myreservation = database.getReference().child("HotelDetails").child("MyReservation");
-                                FirebaseAuth auth1 = FirebaseAuth.getInstance();
-                                String Uid = auth.getCurrentUser().getUid();
-                                myreservation.child(Uid).push().setValue(reservationdetail);
-                                DatabaseReference transaction_id = database.getReference().child("transactionid");
-                            //    TransactionDetail detail = new TransactionDetail(Transaction);
-                              //  transaction_id.push().setValue(detail);
-                                startActivity(new Intent(getApplicationContext(), HotelsFragment.class));
-                                finish();
-                            }
-                        }
-                    });
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    name = documentSnapshot.get("FirstName").toString() + " " + documentSnapshot.get("LastName").toString();
+                    phone = documentSnapshot.get("Phone").toString();
+                    checkinroom = checkin.getText().toString();
+                    checkoutroom = checkout.getText().toString();
+                    randomcode=generatedcode.getText().toString();
+                    tp = price.getText().toString();
+                    numberofroom = roomsize.getText().toString();
+                    Reservationdetail reservationdetail = new Reservationdetail(name, phone, selectedhotelname, roomtypename, numberofroom, checkinroom, checkoutroom, randomcode, tp);
+                    DatabaseReference databaseReference2 = database.getReference().child("HotelDetails").child("Hotels").child(selectedhotelname).child("Reserved");
+                    databaseReference2.child(name).push().setValue(reservationdetail);
+                    DatabaseReference myreservation = database.getReference().child("HotelDetails").child("MyReservation");
+                    FirebaseAuth auth1 = FirebaseAuth.getInstance();
+                    String Uid = auth.getCurrentUser().getUid();
+                    myreservation.child(Uid).push().setValue(reservationdetail);
+                    startActivity(new Intent(getApplicationContext(), HotelsFragment.class));
+                    finish();
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

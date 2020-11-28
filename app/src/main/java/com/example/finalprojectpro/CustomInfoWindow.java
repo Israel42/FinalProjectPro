@@ -10,6 +10,7 @@ import com.google.android.gms.maps.model.Marker;
 
 public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
     Hoteldetail hoteldetail;
+    Roomtypegettersetter roomtypegettersetter;
     LayoutInflater layoutInflater;
     Context context;
 
@@ -29,7 +30,7 @@ public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
         hoteldetail=(Hoteldetail)marker.getTag();
         String hotelname;
         TextView price=mview.findViewById(R.id.textprice);
-        price.setText(String.format("%sETB",hoteldetail.getPrice()));
+        price.setText(String.format("Min:%sETB",hoteldetail.getPrice()));
         hotelname=hoteldetail.getName();
         marker.setTitle(hotelname);
         return mview;

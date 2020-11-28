@@ -74,7 +74,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
-
+       <ScrollView
+           android:layout_width="match_parent"
+           android:layout_height="400dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -119,8 +121,7 @@
                 <TextView
                     android:id="@+id/reviews"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:text="@string/reviews"
                     android:textAlignment="textEnd"
                     android:textColor="#145B59"
@@ -137,7 +138,14 @@
                 android:layout_marginBottom="10dp"
                 android:background="#090909" />
 
-
+            <TextView
+                android:id="@+id/shortnote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                />
 
             <Button
                 android:id="@+id/selectroom"
@@ -147,7 +155,8 @@
                 android:background="@drawable/button_shape"
                 android:text="@string/select_room"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:layout_marginTop="80dp"/>
+                android:layout_marginTop="10dp"/>
         </LinearLayout>
+       </ScrollView>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

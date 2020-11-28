@@ -20,7 +20,7 @@ import com.squareup.picasso.Picasso;
 
 public class Booking extends AppCompatActivity {
     ImageView imageView;
-    TextView hotelN,rate,review,price;
+    TextView hotelN,hotelnot,rate,review,price;
     Button selectroom;
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -33,6 +33,7 @@ public class Booking extends AppCompatActivity {
         setContentView(R.layout.activity_booking);
         imageView=findViewById(R.id.hotelimage2);
         hotelN=findViewById(R.id.hotelnamedetail);
+        hotelnot=findViewById(R.id.shortnote);
         rate=findViewById(R.id.rating1);
         review=findViewById(R.id.reviews);
         price=findViewById(R.id.pricepernight);
@@ -61,6 +62,7 @@ public class Booking extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Hoteldetail hoteldetail=snapshot.getValue(Hoteldetail.class);
                 hotelN.setText(hoteldetail.getName());
+                hotelnot.setText(hoteldetail.getNote());
                 rate.setText(String.valueOf(hoteldetail.getRating()));
                 Picasso.get().load(hoteldetail.getImagepath()).fit().into(imageView);
                 DatabaseReference reference1=reference.child("RoomTypes");

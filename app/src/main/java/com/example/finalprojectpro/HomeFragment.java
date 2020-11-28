@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,15 +37,14 @@ public class HomeFragment extends Fragment {
     ImageView location;
     Animation slide;
     TabLayout tab;
+    RecyclerView recyclerView;
     public static final int PERMISSION_CODE=99;
 
     public HomeFragment() {
-        // Required empty public constructor
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -68,6 +68,8 @@ public class HomeFragment extends Fragment {
         });
         PrefManager manager = new PrefManager(getActivity());
         username.setText(String.format("Hi %s", manager.getusername()));
+
+
     }
 
     public boolean CheckPermission(){

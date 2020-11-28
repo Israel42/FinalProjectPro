@@ -8,11 +8,13 @@ public class Reservationdetail {
     String reservednoofroom;
     String indate;
     String outdate;
-    String txn;
+    String generatedcode;
     String totalprice;
 
+    public Reservationdetail() {
+    }
 
-    public Reservationdetail(String reserver, String reserverphoneNumber, String reservedhotel, String reservedroomtype, String reservednoofroom, String indate, String outdate, String txn, String totalprice) {
+    public Reservationdetail(String reserver, String reserverphoneNumber, String reservedhotel, String reservedroomtype, String reservednoofroom, String indate, String outdate, String generatedcode, String totalprice) {
         this.reserver = reserver;
         this.reserverphoneNumber = reserverphoneNumber;
         this.reservedhotel = reservedhotel;
@@ -20,7 +22,7 @@ public class Reservationdetail {
         this.reservednoofroom = reservednoofroom;
         this.indate = indate;
         this.outdate = outdate;
-        this.txn = txn;
+        this.generatedcode = generatedcode;
         this.totalprice = totalprice;
     }
 
@@ -80,13 +82,14 @@ public class Reservationdetail {
         this.outdate = outdate;
     }
 
-    public String getTxn() {
-        return txn;
+    public String getGeneratedcode() {
+        return generatedcode;
     }
 
-    public void setTxn(String txn) {
-        this.txn = txn;
+    public void setGeneratedcode(String generatedcode) {
+        this.generatedcode = generatedcode;
     }
+
     public String getTotalprice() {
         return totalprice;
     }
@@ -94,5 +97,4 @@ public class Reservationdetail {
     public void setTotalprice(String totalprice) {
         this.totalprice = totalprice;
     }
-
 }

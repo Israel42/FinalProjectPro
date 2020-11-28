@@ -3,7 +3,22 @@ package com.example.finalprojectpro;
 import android.widget.RatingBar;
 
 public class Hoteldetail {
-  String name,imagepath;
+  String name;
+    String imagepath;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public Hoteldetail(String note) {
+        this.note = note;
+    }
+
+    String note;
   float rating;
   int price;
 

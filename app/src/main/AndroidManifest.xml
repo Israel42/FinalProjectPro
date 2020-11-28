@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
+        <activity android:name=".Reservedetail"></activity>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -22,9 +24,7 @@
         <activity android:name=".Reviews" />
         <activity android:name=".Roomtypeactivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".LoginPage">
-
-        </activity>
+        <activity android:name=".LoginPage"></activity>
         <activity android:name=".Register" />
         <activity android:name=".VerifyPhone" />
 
@@ -32,8 +32,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBIKocKKpEMbVeG471q_0UmW7CpregYuPM" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

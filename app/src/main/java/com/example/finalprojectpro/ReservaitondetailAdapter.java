@@ -29,11 +29,14 @@ public class ReservaitondetailAdapter extends RecyclerView.Adapter<Reservaitonde
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-    holder.user_Name.setText(reservationdetails.get(position).getReserver());
-    holder.phone_num.setText(reservationdetails.get(position).getReserverphoneNumber());
     holder.reserved_hotel.setText(reservationdetails.get(position).getReservedhotel());
     holder.room_type.setText(reservationdetails.get(position).getReservedroomtype());
-    holder.noofrooms.setText(reservationdetails.get(position).getReservednoofroom());
+    holder.detailres.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    });
     }
 
     @Override
@@ -42,17 +45,13 @@ public class ReservaitondetailAdapter extends RecyclerView.Adapter<Reservaitonde
     }
 
     public class viewholder extends RecyclerView.ViewHolder{
-        TextView user_Name,phone_num,reserved_hotel,room_type,noofrooms,duration,bill_num;
+        TextView reserved_hotel,room_type,detailres;
 
         public viewholder(View itemView){
             super(itemView);
-        user_Name=itemView.findViewById(R.id.username);
-      /*  phone_num=itemView.findViewById(R.id.phone_N);
-        reserved_hotel=itemView.findViewById(R.id.hotel_names);
-        room_type=itemView.findViewById(R.id.room_type);
-        noofrooms=itemView.findViewById(R.id.numberofrooms);
-        duration=itemView.findViewById(R.id.reserveduration);
-        bill_num=itemView.findViewById(R.id.bill);*/
+        reserved_hotel=itemView.findViewById(R.id.reservedhotel_names);
+        room_type=itemView.findViewById(R.id.reservedroomtype);
+        detailres=itemView.findViewById(R.id.detailreserv);
         }
 
     }
