@@ -60,7 +60,7 @@ public class RecentHotels extends RecyclerView.Adapter<RecentHotels.viewholder> 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return reservationdetailList.size();
     }
 
 

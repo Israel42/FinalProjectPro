@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.graphics.Bitmap;
@@ -41,6 +42,7 @@ public class Reservedetail extends AppCompatActivity {
         setContentView(R.layout.activity_reservedetail);
         detailimage=findViewById(R.id.reservedhoteldetailimage);
         barcode=findViewById(R.id.barcodeview);
+        Log.d("handw", "onCreate: "+barcode.getWidth()+"    "+barcode.getHeight());
         detailname=findViewById(R.id.reservedhoteldetailname);
         detailroom=findViewById(R.id.reservedroomdetailname);
         checkindetail=findViewById(R.id.detailcheckin);
