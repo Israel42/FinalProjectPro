@@ -6,27 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
-
+<TextView
+    android:id="@+id/invistext"
+    android:visibility="invisible"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/reservcardview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         app:cardElevation="10dp"
         app:cardCornerRadius="24dp"
+        app:cardBackgroundColor="#FF146161"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/reservationdetailbackground">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:weightSum="3"
+            >
 
 
             <TextView
@@ -35,7 +41,9 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:textSize="22sp"
+                    android:textColor="#FFF"
                     android:gravity="center"
+                    android:layout_weight="1"
                      />
 
 
@@ -45,7 +53,9 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:textSize="22sp"
+                    android:textColor="#FFF"
                     android:gravity="center"
+                    android:layout_weight="1"
                     />
             <TextView
                     android:id="@+id/detailreserv"
@@ -56,11 +66,13 @@
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="15dp"
                     android:textSize="19dp"
+                    android:textColor="#FFF"
                     android:text="@string/details"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                android:layout_weight="1"
+                />
 
 
         </LinearLayout>
-    </ImageView>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

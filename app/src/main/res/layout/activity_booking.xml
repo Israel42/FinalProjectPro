@@ -34,7 +34,7 @@
             android:layout_alignParentTop="true"
             android:layout_margin="30dp"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="50dp"
             android:elevation="8dp"
@@ -60,6 +60,7 @@
                 app:drawableEndCompat="@drawable/ic_baseline_star_border_24" />
 
         </LinearLayout>
+
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
@@ -76,7 +77,7 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
        <ScrollView
            android:layout_width="match_parent"
-           android:layout_height="400dp">
+           android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

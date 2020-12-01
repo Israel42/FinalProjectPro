@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,13 +30,6 @@ public class MyBookingsFragment extends Fragment {
     ReservaitondetailAdapter reservaitondetailAdapter;
     FirebaseDatabase database;
     DatabaseReference reference;
-    public MyBookingsFragment() {
-        // Required empty public constructor
-    }
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,21 +46,20 @@ public class MyBookingsFragment extends Fragment {
         reservaitondetailAdapter=new ReservaitondetailAdapter(getContext(),reservationdetails);
         reserve.setLayoutManager(new LinearLayoutManager(getContext()));
         reserve.hasFixedSize();
-        reference=database.getReference().child("HotelDetails").child("Hotels").child("Reserved");
+        FirebaseAuth auth=FirebaseAuth.getInstance();
+        String uid=auth.getCurrentUser().getUid();
+        reference=database.getReference().child("HotelDetails").child("MyReservation").child(uid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reservationdetails.clear();
-                if (snapshot.exists()){
                     for (DataSnapshot snapshot1:snapshot.getChildren()){
                         Reservationdetail reservationdetail=snapshot1.getValue(Reservationdetail.class);
                         reservationdetails.add(reservationdetail);
                     }
                     reserve.setAdapter(reservaitondetailAdapter);
                     reservaitondetailAdapter.notifyDataSetChanged();
-                }else{
-                    Toast.makeText(getContext(), "There are no reserved hotels", Toast.LENGTH_LONG).show();
-                }
+
             }
 
             @Override

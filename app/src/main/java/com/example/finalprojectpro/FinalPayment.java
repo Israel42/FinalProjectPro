@@ -40,6 +40,7 @@ import com.squareup.picasso.Picasso;
 import android.os.Bundle;
 import android.view.View;
 
+import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -61,6 +62,8 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
     Date checkindate, checkoutdate;
     String checkTrasanction = null;
     String Key, roomtypename, date1, date2, randomcode;
+    static final String ab="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    static SecureRandom random=new SecureRandom();
     long cout;
 
     @Override
@@ -83,6 +86,8 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
         database = FirebaseDatabase.getInstance();
         checkin.setInputType(InputType.TYPE_NULL);
         checkout.setInputType(InputType.TYPE_NULL);
+        String g=randomString(8);
+        generatedcode.setText(g);
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +146,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                             e.printStackTrace();
                         }
                         int valueend = getdaybetween(calendar1.getTime(), calendar2.getTime());
-                        int piceof = Integer.parseInt(getIntent().getStringExtra("roomprice"));
+                        int piceof = Integer.parseInt(getIntent().getStringExtra("pricepass"));
                         int finalprice = valueend * piceof;
                         price.setText(String.valueOf(finalprice) + "ETB");
                     }
@@ -240,7 +245,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                 if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     name = documentSnapshot.get("FirstName").toString() + " " + documentSnapshot.get("LastName").toString();
-                    phone = documentSnapshot.get("Phone").toString();
+                    phone = documentSnapshot.get("PhoneNumber").toString();
                     checkinroom = checkin.getText().toString();
                     checkoutroom = checkout.getText().toString();
                     randomcode=generatedcode.getText().toString();
@@ -248,12 +253,11 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                     numberofroom = roomsize.getText().toString();
                     Reservationdetail reservationdetail = new Reservationdetail(name, phone, selectedhotelname, roomtypename, numberofroom, checkinroom, checkoutroom, randomcode, tp);
                     DatabaseReference databaseReference2 = database.getReference().child("HotelDetails").child("Hotels").child(selectedhotelname).child("Reserved");
-                    databaseReference2.child(name).push().setValue(reservationdetail);
+                    databaseReference2.child(randomcode).setValue(reservationdetail);
                     DatabaseReference myreservation = database.getReference().child("HotelDetails").child("MyReservation");
-                    FirebaseAuth auth1 = FirebaseAuth.getInstance();
                     String Uid = auth.getCurrentUser().getUid();
-                    myreservation.child(Uid).push().setValue(reservationdetail);
-                    startActivity(new Intent(getApplicationContext(), HotelsFragment.class));
+                    myreservation.child(Uid).child(randomcode).setValue(reservationdetail);
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
             }
@@ -263,6 +267,12 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
     public int getdaybetween(Date d1, Date d2) {
         return (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
-
+    public String randomString(int len){
+        StringBuilder stringBuilder=new StringBuilder(len);
+        for (int i=0;i<len;i++) {
+            stringBuilder.append(ab.charAt(random.nextInt(ab.length())));
+        }
+            return stringBuilder.toString();
+    }
 
 }

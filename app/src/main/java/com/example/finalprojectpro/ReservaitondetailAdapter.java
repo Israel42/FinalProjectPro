@@ -1,6 +1,7 @@
 package com.example.finalprojectpro;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +30,16 @@ public class ReservaitondetailAdapter extends RecyclerView.Adapter<Reservaitonde
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
+        holder.passcode.setText(reservationdetails.get(position).getGeneratedcode());
     holder.reserved_hotel.setText(reservationdetails.get(position).getReservedhotel());
     holder.room_type.setText(reservationdetails.get(position).getReservedroomtype());
     holder.detailres.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            String reshot=holder.passcode.getText().toString();
+            Intent intent= new Intent(view.getContext(),Reservedetail.class);
+            intent.putExtra("codepass",reshot);
+            view.getContext().startActivity(intent);
         }
     });
     }
@@ -45,13 +50,14 @@ public class ReservaitondetailAdapter extends RecyclerView.Adapter<Reservaitonde
     }
 
     public class viewholder extends RecyclerView.ViewHolder{
-        TextView reserved_hotel,room_type,detailres;
+        TextView reserved_hotel,room_type,detailres,passcode;
 
         public viewholder(View itemView){
             super(itemView);
         reserved_hotel=itemView.findViewById(R.id.reservedhotel_names);
         room_type=itemView.findViewById(R.id.reservedroomtype);
         detailres=itemView.findViewById(R.id.detailreserv);
+        passcode=itemView.findViewById(R.id.invistext);
         }
 
     }

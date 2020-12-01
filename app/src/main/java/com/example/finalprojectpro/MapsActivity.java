@@ -193,7 +193,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         linearLayout.setVisibility(View.VISIBLE);
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("HotelDetails").child("HotelLocation");
         final GeoFire geoFire=new GeoFire(reference);
-        final GeoQuery geoQuery=geoFire.queryAtLocation(userLocation,5);
+        final GeoQuery geoQuery=geoFire.queryAtLocation(userLocation,2);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
@@ -215,6 +215,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             @Override
                             public void onInfoWindowClick(Marker marker) {
                                 seeinfoWindow(marker);
+                            }
+                        });
+                        checkAvailability.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String n=hoteldetail.getName();
+                                Intent intent=new Intent(getApplicationContext(),Booking.class);
+                                intent.putExtra("hotelpass",n);
+                                startActivity(intent);
                             }
                         });
                     }

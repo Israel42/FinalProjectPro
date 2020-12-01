@@ -41,4 +41,5 @@
     <string name="reserved_hotel">የተያዘው ሆቴል</string>
     <string name="details">Details</string>
     <string name="finish">ጨርስ</string>
+    <string name="checkin">CheckIn</string>
 </resources>
