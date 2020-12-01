@@ -46,7 +46,8 @@ public class ReservaitondetailAdapter extends RecyclerView.Adapter<Reservaitonde
 
     @Override
     public int getItemCount() {
-        return 0;
+
+        return reservationdetails.size();
     }
 
     public class viewholder extends RecyclerView.ViewHolder{

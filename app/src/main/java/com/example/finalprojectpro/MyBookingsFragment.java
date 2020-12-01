@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ public class MyBookingsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reservationdetails.clear();
                     for (DataSnapshot snapshot1:snapshot.getChildren()){
+                        Log.d("Values", "onDataChange: "+snapshot1.getValue().toString());
                         Reservationdetail reservationdetail=snapshot1.getValue(Reservationdetail.class);
                         reservationdetails.add(reservationdetail);
                     }

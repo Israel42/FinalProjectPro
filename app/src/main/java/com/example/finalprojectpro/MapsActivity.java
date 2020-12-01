@@ -233,6 +233,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     }
                 });
+                /*  ezi wuste calculate aderegewu for the nearest room then send notification..
+                   Double  double = GeoUtils.distance(userlocation, geoLocation(ye hotel location)) / 1000
+                   Decemalfromat decimalformat = DecimalFormat("#.##")// yeha wede decimal mekeyera new isru lemen asfelegen kalen wedezi format kalkeyerkewu double selhone yemate 0 yasayehal
+                   yagenewun distance wede km endekeye madreg string or float metekem tecehalele
+                   String mindistance=decimalformat.format(double).toString();
+
+                   keza if statement metekem new yeha yasfelegewu demo hula vibrate endayaderge meyadergebeten km or m lemasgebat new
+                   if(mindistance==o.5.toString(){
+                      sendnotification(to,title,token) // token ke firestore ke user laye new metagenewu
+                   }
+                 */
             }
 
             @Override
@@ -242,7 +253,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
-
+                // kefeleke ezi gar notify madreg techelale ...
             }
 
             @Override
