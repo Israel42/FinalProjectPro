@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.squareup.picasso.Picasso;
 
 public class Reservedetail extends AppCompatActivity {
@@ -32,7 +33,6 @@ public class Reservedetail extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference reference;
-    Hoteldetail hoteldetail;
     Reservationdetail reservationdetail;
     String passc,hop;
 
@@ -42,6 +42,7 @@ public class Reservedetail extends AppCompatActivity {
         setContentView(R.layout.activity_reservedetail);
         detailimage=findViewById(R.id.reservedhoteldetailimage);
         barcode=findViewById(R.id.barcodeview);
+        database=FirebaseDatabase.getInstance();
         Log.d("handw", "onCreate: "+barcode.getWidth()+"    "+barcode.getHeight());
         detailname=findViewById(R.id.reservedhoteldetailname);
         detailroom=findViewById(R.id.reservedroomdetailname);
@@ -50,51 +51,54 @@ public class Reservedetail extends AppCompatActivity {
         code=findViewById(R.id.bookcode);
         passc=getIntent().getStringExtra("codepass");
         code.setText(passc);
-        MultiFormatWriter multiFormatWriter=new MultiFormatWriter();
-        try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(passc,BarcodeFormat.CODE_128, barcode.getWidth(), barcode.getHeight());
-            Bitmap bitmap = Bitmap.createBitmap(barcode.getWidth(), barcode.getHeight(), Bitmap.Config.RGB_565);
-            for (int i = 0; i < barcode.getWidth(); i++) {
-                for (int j = 0; j < barcode.getHeight(); j++) {
-                    bitmap.setPixel(i, j, bitMatrix.get(i, j) ? Color.BLACK : Color.WHITE);
-
-                }
-            }
-            barcode.setImageBitmap(bitmap);
-        }catch (WriterException e){
-            e.printStackTrace();
-        }
+        displaybitmap(passc);
+        Log.d("passc", "onCreate: "+passc);
         auth=FirebaseAuth.getInstance();
         String uid=auth.getCurrentUser().getUid();
-        reference=database.getReference().child("HotelDetails").child("Hotels").child("MyReservation").child(uid).child(passc);
+       reference=database.getReference().child("HotelDetails").child("MyReservation").child(uid).child(passc);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reservationdetail=snapshot.getValue(Reservationdetail.class);
-                hop=reservationdetail.getReservedhotel().toString();
+                hop=reservationdetail.getReservedhotel();
                 detailname.setText(hop);
                 detailroom.setText(String.valueOf(reservationdetail.getReservedroomtype()));
                 checkindetail.setText(String.valueOf(reservationdetail.getIndate()));
                 checkoutdetail.setText(String.valueOf(reservationdetail.getOutdate()));
-            }
+                DatabaseReference reference1=database.getReference().child("HotelDetails").child("Hotels").child(hop);
+                reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Detail detail=snapshot.getValue(Detail.class);
+                        Log.d("value", "onDataChange: "+detail.getImagepath());
+                        Picasso.get().load(detail.getImagepath()).fit().into(detailimage);
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-        DatabaseReference reference1=database.getReference().child("HotelDetails").child("Hotels").child(hop);
-        reference1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                hoteldetail=snapshot.getValue(Hoteldetail.class);
-                Picasso.get().load(hoteldetail.getImagepath()).fit().into(detailimage);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+    }
 
-            }
-        });
+
+
+    private void displaybitmap(String passc) {
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(passc, BarcodeFormat.CODE_128,barcode.getWidth(),barcode.getHeight());
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            barcode.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
     }
 }

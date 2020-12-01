@@ -41,7 +41,7 @@ public class RecentHotels extends RecyclerView.Adapter<RecentHotels.viewholder> 
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-        String h=String.valueOf(reservationdetailList.get(position).getReservedhotel());
+       String h=String.valueOf(reservationdetailList.get(position).getReservedhotel());
         holder.hn.setText(h);
         DatabaseReference reference=database.getReference().child("HotelDetails").child("Hotels").child(h);
         reference.addValueEventListener(new ValueEventListener() {
@@ -56,6 +56,8 @@ public class RecentHotels extends RecyclerView.Adapter<RecentHotels.viewholder> 
 
             }
         });
+
+
     }
 
     @Override

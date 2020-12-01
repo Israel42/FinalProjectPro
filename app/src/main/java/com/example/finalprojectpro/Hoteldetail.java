@@ -3,24 +3,11 @@ package com.example.finalprojectpro;
 import android.widget.RatingBar;
 
 public class Hoteldetail {
-  String name;
+    String name;
     String imagepath;
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public Hoteldetail(String note) {
-        this.note = note;
-    }
-
     String note;
-  float rating;
-  int price;
+    float rating;
+    int price;
 
     public Hoteldetail() {
     }
@@ -62,5 +49,16 @@ public class Hoteldetail {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public Hoteldetail(String note) {
+        this.note = note;
     }
 }

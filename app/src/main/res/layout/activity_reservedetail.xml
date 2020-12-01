@@ -156,11 +156,12 @@
                 android:layout_marginBottom="25dp">
 
                 <ImageView
+                    android:scaleType="fitXY"
                     android:id="@+id/barcodeview"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:layout_marginTop="25dp"
-                    />
+                    android:layout_centerInParent="true"
+                    tools:ignore="ContentDescription" />
             </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
