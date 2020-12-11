@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".Reservedetail"></activity>
+        <activity android:name=".Roomkindlist"></activity>
+        <activity android:name=".Hotellist" />
+        <activity android:name=".Reservedetail" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,29 +19,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".FirebaseMessaging"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENTS"/>
-            </intent-filter>
-        </service>
         <activity android:name=".Language_selection" />
         <activity android:name=".MapsActivity" />
         <activity android:name=".FinalPayment" />
         <activity android:name=".Booking" />
         <activity android:name=".Reviews" />
-        <activity android:name=".Roomtypeactivity" />
+        <activity android:name=".Roomlist" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".LoginPage"></activity>
+        <activity android:name=".LoginPage" />
         <activity android:name=".Register" />
         <activity android:name=".VerifyPhone" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBIKocKKpEMbVeG471q_0UmW7CpregYuPM" />
+
+        <service
+            android:name=".FirebaseMessaging"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENTS" />
+            </intent-filter>
+        </service>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 </manifest>

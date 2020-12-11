@@ -39,6 +39,7 @@ public class HoteldetailAdapter extends RecyclerView.Adapter<HoteldetailAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
+        String hkind=hoteldetails.get(position).getKind();
         holder.hotelname.setText(hoteldetails.get(position).getName());
         holder.ratingBar.setRating(hoteldetails.get(position).getRating());
         Picasso.get().load(hoteldetails.get(position).getImagepath()).fit().into(holder.imageView);
@@ -48,6 +49,7 @@ public class HoteldetailAdapter extends RecyclerView.Adapter<HoteldetailAdapter.
                 String passhotel=holder.hotelname.getText().toString();
                 Intent intent=new Intent(view.getContext(),Booking.class);
                 intent.putExtra("hotelpass",passhotel);
+                intent.putExtra("hkindpass",hkind);
                 view.getContext().startActivity(intent);
             }
         });
@@ -57,6 +59,7 @@ public class HoteldetailAdapter extends RecyclerView.Adapter<HoteldetailAdapter.
                 String passhotel=holder.hotelname.getText().toString();
                 Intent intent=new Intent(view.getContext(),Reviews.class);
                 intent.putExtra("hotelpass",passhotel);
+                intent.putExtra("hkindpass",hkind);
                 view.getContext().startActivity(intent);
             }
         });
@@ -72,8 +75,6 @@ public class HoteldetailAdapter extends RecyclerView.Adapter<HoteldetailAdapter.
         ImageView imageView;
         RatingBar ratingBar;
         TextView hotelname,review;
-
-
 
         public viewholder(@NonNull View itemView){
             super(itemView);

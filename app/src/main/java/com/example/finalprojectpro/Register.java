@@ -39,7 +39,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class Register extends AppCompatActivity {
-    EditText firstname,lastname,Age;
+    EditText firstname,lastname,Age, address;
     Button register;
     RadioGroup radioGroup;
     RadioButton radioButton;
@@ -61,6 +61,7 @@ public class Register extends AppCompatActivity {
         firstname=findViewById(R.id.firstname);
         lastname=findViewById(R.id.lastname);
         Age=findViewById(R.id.Age);
+        address=findViewById(R.id.Address);
         radioGroup=findViewById(R.id.radiogroup);
         register=findViewById(R.id.register);
         Profile=findViewById(R.id.profileadd);
@@ -81,10 +82,11 @@ public class Register extends AppCompatActivity {
         });
         register.setOnClickListener(view->{
             if (imageUri!=null){
-                String fname,lname,age,gender,phonenumber;
+                String fname,lname,age,gender,phonenumber,addr;
                 fname=firstname.getText().toString();
                 lname=lastname.getText().toString();
                 age=Age.getText().toString();
+                addr=address.getText().toString();
                 phonenumber=getIntent().getStringExtra("Phonenum");
                 int selectedid=radioGroup.getCheckedRadioButtonId();
                 radioButton=findViewById(selectedid);
@@ -99,7 +101,7 @@ public class Register extends AppCompatActivity {
                 int ageInterd=Integer.parseInt(age);
                 int agemax=90;
                 int agemin=19;
-                if (ageInterd<agemin&&ageInterd>agemax){
+                if (ageInterd<agemin||ageInterd>agemax){
                     Age.setError("PLEASE ENTER YOUR AGE CORRECTLY");
                     Age.setFocusable(true);
                     return;
@@ -122,6 +124,7 @@ public class Register extends AppCompatActivity {
                         map.put("Age",age);
                         map.put("PhoneNumber",phonenumber);
                         map.put("Gender",gender);
+                        map.put("Address",addr);
                         map.put("ImageUrl",imageUri);
                         map.put("Token",token);
                         PrefManager prefManager=new PrefManager(getApplicationContext());

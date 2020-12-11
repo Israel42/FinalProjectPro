@@ -49,7 +49,7 @@ public class MyBookingsFragment extends Fragment {
         reserve.hasFixedSize();
         FirebaseAuth auth=FirebaseAuth.getInstance();
         String uid=auth.getCurrentUser().getUid();
-        reference=database.getReference().child("HotelDetails").child("MyReservation").child(uid);
+        reference=database.getReference().child("Hoteltypes").child("OwnReservation").child(uid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

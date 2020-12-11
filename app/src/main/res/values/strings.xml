@@ -4,11 +4,10 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="reserved_hotel">Reserved Hotel</string>
     <string name="duration">Duration</string>
-    <string name="qrcodedisplay" translatable="false">Qrcodedisplay</string>
     <string name="choose_room_type">Choose Room Type</string>
     <string name="how_many_rooms_do_you_want">How many rooms do you want?</string>
-    <string name="channel_name" translatable="false">Channel 1</string>
-    <string name="default_notification_channel_id" translatable="false">Channel 2</string>
+    <string name="channel_name">Channel 1</string>
+    <string name="default_notification_channel_id">Channel 2</string>
     <string name="per_night">Per Night</string>
     <string name="reviews">Reviews</string>
     <string name="select_room">Select Room</string>
@@ -47,4 +46,7 @@
     <string name="log_out">Log out</string>
     <string name="details">Details</string>
     <string name="checkin">CheckIn</string>
+    <string name="add_your_review_and_rating_here">Add your review and rating here</string>
+    <string name="Select">Select</string>
+    <string name="select">Select</string>
 </resources>

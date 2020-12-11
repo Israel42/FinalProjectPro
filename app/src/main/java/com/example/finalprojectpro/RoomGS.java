@@ -1,26 +1,17 @@
 package com.example.finalprojectpro;
 
-public class Roomtypegettersetter {
-    String type,imagepath;
-    int number;
-    int  price;
+public class RoomGS {
+    String imagepath;
+    String number;
+    int price;
 
-    public Roomtypegettersetter() {
+    public RoomGS() {
     }
 
-    public Roomtypegettersetter(String type, String imagepath, int number, int price) {
-        this.type = type;
+    public RoomGS(String imagepath, String number, int price) {
         this.imagepath = imagepath;
         this.number = number;
         this.price = price;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getImagepath() {
@@ -31,11 +22,11 @@ public class Roomtypegettersetter {
         this.imagepath = imagepath;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
@@ -47,5 +38,3 @@ public class Roomtypegettersetter {
         this.price = price;
     }
 }
-
-

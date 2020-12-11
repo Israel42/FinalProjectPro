@@ -1,14 +1,12 @@
 package com.example.finalprojectpro;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -22,23 +20,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
-
-import android.os.Bundle;
-import android.view.View;
 
 import java.security.SecureRandom;
 import java.text.ParseException;
@@ -50,18 +42,17 @@ import java.util.GregorianCalendar;
 public class FinalPayment extends AppCompatActivity implements View.OnClickListener {
     EditText checkin, checkout;
     TextView price, roomsize, generatedcode;
-    Button plus, minus, pay;
+    Button pay;
     ImageView roompicture, cbelogo, amolelogo, birhanlogo;
     DatePickerDialog datePickerDialog;
     DatePicker datePicker;
     DatabaseReference reference;
     FirebaseDatabase database;
-    int hotelroomsize, currentprice;
     Calendar calendar1, calendar2;
     String selectedhotelname, name, phone, checkinroom, checkoutroom, trans, numberofroom, tp;
     Date checkindate, checkoutdate;
     String checkTrasanction = null;
-    String Key, roomtypename, date1, date2, randomcode;
+    String Key, roomtypename,hkind,hotel,rname, date1, date2, randomcode;
     static final String ab="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static SecureRandom random=new SecureRandom();
     long cout;
@@ -72,9 +63,6 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_final_payment);
         checkout = findViewById(R.id.checkout);
         checkin = findViewById(R.id.checkin);
-        roomsize = findViewById(R.id.numberofrooms);
-        plus = findViewById(R.id.plus);
-        minus = findViewById(R.id.minus);
         generatedcode = findViewById(R.id.generated);
         cbelogo = findViewById(R.id.cbelogo);
         birhanlogo = findViewById(R.id.birhanlogo);
@@ -88,6 +76,33 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
         checkout.setInputType(InputType.TYPE_NULL);
         String g=randomString(8);
         generatedcode.setText(g);
+        cbelogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String cben="*889#";
+                Intent intent=new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:"+cben));
+                startActivity(intent);
+            }
+        });
+        birhanlogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String birn="*881#";
+                Intent intent=new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:"+birn));
+                startActivity(intent);
+            }
+        });
+        amolelogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String amn="*996#";
+                Intent intent=new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:"+amn));
+                startActivity(intent);
+            }
+        });
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +132,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                     }, year, month, day);
                     long now = System.currentTimeMillis();
                     datePickerDialog.getDatePicker().setMinDate(now);
-                    datePickerDialog.getDatePicker().setMaxDate(now + (1000 * 60 * 60 * 24 * 7));
+                    datePickerDialog.getDatePicker().setMaxDate(now + (1000 * 60 * 60 * 24 * 14));
                     datePickerDialog.show();
                 }
             }
@@ -152,64 +167,21 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                     }
                 }, year, month, day);
                 datePickerDialog.getDatePicker().setMinDate(cout + (1000 * 60 * 60 * 24));
-                datePickerDialog.getDatePicker().setMaxDate(cout + (1000 * 60 * 60 * 24 * 7));
+                datePickerDialog.getDatePicker().setMaxDate(cout + (1000 * 60 * 60 * 24 * 30));
                 datePickerDialog.show();
             }
         });
         pay.setOnClickListener(this);
-        roomtypename = getIntent().getStringExtra("roompass");
-        final String hotel = getIntent().getStringExtra("hotelpass");
-        reference = database.getReference().child("HotelDetails").child("Hotels").child(hotel).child("RoomTypes").child(roomtypename);
+        roomtypename = getIntent().getStringExtra("rkindpass");
+        hotel = getIntent().getStringExtra("hotelpass");
+        rname=getIntent().getStringExtra("roompass");
+        hkind=getIntent().getStringExtra("hkindpass");
+        reference = database.getReference().child("Hoteltypes").child(hkind).child(hotel).child("Roomtypes").child(roomtypename).child(rname);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                final Roomtypegettersetter roomtypegettersetter = snapshot.getValue(Roomtypegettersetter.class);
+                final RoomGS roomtypegettersetter = snapshot.getValue(RoomGS.class);
                 Picasso.get().load(roomtypegettersetter.getImagepath()).fit().into(roompicture);
-                final int roomsizehotel = roomtypegettersetter.getNumber();
-                hotelroomsize = Integer.parseInt(roomsize.getText().toString());
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (currentprice != 0) {
-                            currentprice = getdaybetween(calendar1.getTime(), calendar2.getTime());
-                            int priceofroom = roomtypegettersetter.getPrice();
-                            int priceperday = priceofroom * currentprice;
-                            price.setText(String.valueOf(priceperday) + "ETB");
-                        }
-                    }
-                });
-                plus.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (hotelroomsize != roomsizehotel) {
-                            hotelroomsize++;
-                            int valueof = getdaybetween(calendar1.getTime(), calendar2.getTime());
-                            roomsize.setText(String.valueOf(hotelroomsize));
-                            int priceperroom = roomtypegettersetter.getPrice();
-                            int priceroom = Integer.parseInt(roomsize.getText().toString());
-                            int finalprice = priceperroom * priceroom * valueof;
-                            price.setText(String.valueOf(finalprice) + "ETB");
-                        } else {
-                            Toast.makeText(FinalPayment.this, "Maximum available rooms", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                minus.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (hotelroomsize != 1) {
-                            hotelroomsize--;
-                            int priceof = getdaybetween(calendar1.getTime(), calendar2.getTime());
-                            roomsize.setText(String.valueOf(hotelroomsize));
-                            int priceperroom = roomtypegettersetter.getPrice();
-                            int priceroom = Integer.parseInt(roomsize.getText().toString());
-                            int finalprice = priceperroom * priceroom * priceof;
-                            price.setText(String.valueOf(finalprice) + "ETB");
-                        } else {
-                            Toast.makeText(FinalPayment.this, "Minimum number of room", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
             }
 
             @Override
@@ -223,7 +195,6 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         checkinroom = checkin.getText().toString();
         checkoutroom = checkout.getText().toString();
-        numberofroom = roomsize.getText().toString();
         if (checkinroom.isEmpty()) {
             checkin.setError("Please add check in date");
             checkin.setFocusable(true);
@@ -234,8 +205,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
             checkout.setFocusable(true);
             return;
         }
-        selectedhotelname = getIntent().getStringExtra("hotelpass");
-        roomtypename = getIntent().getStringExtra("roompass");
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String UID = auth.getCurrentUser().getUid();
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Users").document(UID);
@@ -250,13 +220,12 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                     checkoutroom = checkout.getText().toString();
                     randomcode=generatedcode.getText().toString();
                     tp = price.getText().toString();
-                    numberofroom = roomsize.getText().toString();
-                    Reservationdetail reservationdetail = new Reservationdetail(name, phone, selectedhotelname, roomtypename, numberofroom, checkinroom, checkoutroom, randomcode, tp);
-                    DatabaseReference databaseReference2 = database.getReference().child("HotelDetails").child("Hotels").child(selectedhotelname).child("Reserved");
+                    Reservationdetail reservationdetail = new Reservationdetail(name, phone,hkind, hotel, roomtypename, rname, checkinroom, checkoutroom, randomcode, tp);
+                    DatabaseReference databaseReference2 = database.getReference().child("Hoteltypes").child(hkind).child(hotel).child("Reserved");
                     databaseReference2.child(randomcode).setValue(reservationdetail);
-                    DatabaseReference myreservation = database.getReference().child("HotelDetails").child("MyReservation");
+                    DatabaseReference myreservation = database.getReference().child("Hoteltypes").child("OwnReservation");
                     String Uid = auth.getCurrentUser().getUid();
-                    myreservation.child(Uid).child(randomcode).setValue(reservationdetail);
+                    myreservation.child(Uid).push().setValue(reservationdetail);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }

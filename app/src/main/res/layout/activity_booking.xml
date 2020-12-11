@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginBottom="49dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hotelname"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="#FFFFFF"
+                android:textColor="#000"
                 android:textSize="29sp" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:drawablePadding="3dp"
-                android:textColor="#FFFFFF"
+                android:textColor="#000"
                 android:textSize="17sp"
                 app:drawableEndCompat="@drawable/ic_baseline_star_border_24" />
 
@@ -71,93 +71,69 @@
         android:layout_marginEnd="8dp"
         app:cardCornerRadius="33dp"
         app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
-       <ScrollView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#050505" />
 
-                <TextView
-                    android:id="@+id/pernight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="@string/per_night"
-                    android:textColor="#121111"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/pricepernight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:layout_weight="1"
-                    android:text="Price Range"
-                    android:textAlignment="viewEnd"
-                    android:textSize="18sp" />
-            </LinearLayout>
 
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="#050505" />
                 <TextView
                     android:id="@+id/reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="15dp"
                     android:text="@string/reviews"
                     android:textAlignment="textEnd"
                     android:textColor="#145B59"
                     android:textSize="18sp"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="15dp"
                     app:drawableEndCompat="@drawable/ic_baseline_rate_review_24" />
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="#090909" />
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#090909" />
+                <TextView
+                    android:id="@+id/shortnote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black" />
+                <Button
+                    android:id="@+id/selectroom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/button_shape"
+                    android:text="@string/select_room"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
-            <TextView
-                android:id="@+id/shortnote"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/black"
-                />
 
-            <Button
-                android:id="@+id/selectroom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/button_shape"
-                android:text="@string/select_room"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:layout_marginTop="10dp"/>
-        </LinearLayout>
-       </ScrollView>
+            </LinearLayout>
+        </ScrollView>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

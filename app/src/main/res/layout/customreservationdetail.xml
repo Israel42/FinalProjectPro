@@ -18,13 +18,14 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/reservcardview"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         app:cardBackgroundColor="#FF146161"
         app:cardCornerRadius="24dp"
-        app:cardElevation="10dp"
+        app:cardElevation="15dp"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

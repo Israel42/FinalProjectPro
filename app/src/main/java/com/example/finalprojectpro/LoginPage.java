@@ -50,7 +50,7 @@ public class LoginPage extends AppCompatActivity {
         flipper.startFlipping();
         flipper.setInAnimation(getApplicationContext(),R.anim.slide_in_right);
         flipper.setOutAnimation(getApplicationContext(),R.anim.slide_out_activity);
-        flipper.setFlipInterval(3000);
+        flipper.setFlipInterval(4000);
         loginpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

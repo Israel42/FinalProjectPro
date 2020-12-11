@@ -152,7 +152,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (location!=null){
             onLocationChanged(location);
         }
-        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,10000,3,this);
+        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,10000,50,this);
         CustomInfoWindow infoWindow=new CustomInfoWindow(getApplicationContext());
         map.setInfoWindowAdapter(infoWindow);
     }
@@ -164,12 +164,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         userLocation=new GeoLocation(location.getLatitude(),location.getLongitude());
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(mOrigin)
-                .zoom(15)
+                .zoom(16)
                 .bearing(location.getBearing())
                 .tilt(90)
                 .build();
         map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
     @Override
@@ -191,13 +191,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onClick(View view) {
         rippleBackground.startRippleAnimation();
         linearLayout.setVisibility(View.VISIBLE);
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("HotelDetails").child("HotelLocation");
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Hoteltypes").child("Location");
         final GeoFire geoFire=new GeoFire(reference);
-        final GeoQuery geoQuery=geoFire.queryAtLocation(userLocation,2);
+        final GeoQuery geoQuery=geoFire.queryAtLocation(userLocation,3);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
-                final DatabaseReference  databaseReference=FirebaseDatabase.getInstance().getReference().child("HotelDetails").child("Hotels").child(key);
+                final DatabaseReference  databaseReference=FirebaseDatabase.getInstance().getReference().child("Hoteltypes").child("Location").child(key);
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -217,15 +217,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 seeinfoWindow(marker);
                             }
                         });
-                        checkAvailability.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                String n=hoteldetail.getName();
-                                Intent intent=new Intent(getApplicationContext(),Booking.class);
-                                intent.putExtra("hotelpass",n);
-                                startActivity(intent);
-                            }
-                        });
+
                     }
 
                     @Override
@@ -270,16 +262,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void seeinfoWindow(Marker marker) {
         cardView.setVisibility(View.VISIBLE);
         String hotelname = marker.getTitle();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("HotelDetails").child("Hotels").child(hotelname);
+        final String hkind;
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("mapref").child(hotelname);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Hoteldetail hotelDetail = snapshot.getValue(Hoteldetail.class);
+                hkind=hotelDetail.getKind().toString();
                 hotelnameview.setText(hotelDetail.getName());
                 ratingBar.setRating(hotelDetail.getRating());
                 Picasso.get().load(hotelDetail.getImagepath()).fit().into(hotelimage);
 
             }
+            checkAvailability.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String n=hoteldetail.getName().toString();
+                    Intent intent=new Intent(getApplicationContext(),Booking.class);
+                    intent.putExtra("hotelpass",n);
+                    intent.putExtra("hkindpass",hkind);
+                    startActivity(intent);
+                }
+            });
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

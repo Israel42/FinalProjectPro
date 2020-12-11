@@ -39,7 +39,11 @@
     <string name="choose_room_type">የክፍል አይነት ይምረጡ</string>
     <string name="duration">የቆይታ ጊዜ</string>
     <string name="reserved_hotel">የተያዘው ሆቴል</string>
-    <string name="details">Details</string>
+    <string name="details">ዝርዝር</string>
     <string name="finish">ጨርስ</string>
-    <string name="checkin">CheckIn</string>
+    <string name="checkin">መግቢያ ቀን</string>
+    <string name="add_your_review_and_rating_here">የራስዎን አስተያየት ይስጡ</string>
+    <string name="select">ምረጥ</string>
+    <string name="channel_name" translatable="false">Channel 1</string>
+    <string name="default_notification_channel_id" translatable="false">Channel 2</string>
 </resources>

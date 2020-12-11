@@ -5,29 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Language_selection"
-    android:background="@drawable/language_selection_background">
+    android:background="@drawable/splashscreenmain">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginStart="15dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.69">
+        app:layout_constraintVertical_bias="0.75">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Language/ቋንቋ ይምረጡ"
-            android:textColor="#000"
-            android:textSize="23sp" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="15dp">
+            android:layout_marginStart="15dp"
+            android:orientation="horizontal">
+
             <RadioGroup
                 android:id="@+id/languageradiogroup"
                 android:layout_width="match_parent"
@@ -48,9 +43,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="አማርኛ"/>
+                    android:text="አማርኛ" />
             </RadioGroup>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Language/ቋንቋ ይምረጡ"
+            android:textColor="#000"
+            android:textSize="23sp" />
+
     </LinearLayout>
 
     <Button
@@ -59,7 +62,7 @@
         android:layout_height="wrap_content"
         android:background="@color/transparent"
         android:text="Next/ቀጥል >"
-        android:textColor="#282D2E"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.81"

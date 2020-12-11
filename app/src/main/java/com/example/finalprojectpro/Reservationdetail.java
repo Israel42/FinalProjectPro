@@ -3,6 +3,7 @@ package com.example.finalprojectpro;
 public class Reservationdetail {
     String reserver;
     String reserverphoneNumber;
+    String reservedhkind;
     String reservedhotel;
     String reservedroomtype;
     String reservednoofroom;
@@ -14,9 +15,10 @@ public class Reservationdetail {
     public Reservationdetail() {
     }
 
-    public Reservationdetail(String reserver, String reserverphoneNumber, String reservedhotel, String reservedroomtype, String reservednoofroom, String indate, String outdate, String generatedcode, String totalprice) {
+    public Reservationdetail(String reserver, String reserverphoneNumber, String reservedhkind, String reservedhotel, String reservedroomtype, String reservednoofroom, String indate, String outdate, String generatedcode, String totalprice) {
         this.reserver = reserver;
         this.reserverphoneNumber = reserverphoneNumber;
+        this.reservedhkind = reservedhkind;
         this.reservedhotel = reservedhotel;
         this.reservedroomtype = reservedroomtype;
         this.reservednoofroom = reservednoofroom;
@@ -40,6 +42,14 @@ public class Reservationdetail {
 
     public void setReserverphoneNumber(String reserverphoneNumber) {
         this.reserverphoneNumber = reserverphoneNumber;
+    }
+
+    public String getReservedhkind() {
+        return reservedhkind;
+    }
+
+    public void setReservedhkind(String reservedhkind) {
+        this.reservedhkind = reservedhkind;
     }
 
     public String getReservedhotel() {

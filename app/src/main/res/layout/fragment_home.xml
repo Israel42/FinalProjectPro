@@ -82,51 +82,7 @@
     </LinearLayout>
 </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:padding="10dp"
-        android:text="@string/your_recent_visits"
-        android:textColor="#F6F3F3"
-        android:textSize="21sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toper" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tablayout"
-        app:tabGravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:tabTextColor="@android:color/white">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/recenthotels"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hotels" />
-
-    </com.google.android.material.tabs.TabLayout>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/visitedhotels"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tablayout">
-
-    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

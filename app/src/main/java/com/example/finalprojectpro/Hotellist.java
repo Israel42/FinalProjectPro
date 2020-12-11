@@ -1,61 +1,59 @@
 package com.example.finalprojectpro;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Roomtypeactivity extends AppCompatActivity {
-    RoomtypeAdapter roomtypeAdapter;
+public class Hotellist extends AppCompatActivity {
+    HoteldetailAdapter hoteldetailAdapter;
     RecyclerView recyclerView;
-    List<Roomtypegettersetter> roomtypegettersetters=new ArrayList<>();
-    String hotelname;
+    List<Hoteldetail> hoteldetailList=new ArrayList<>();
+    String hkind;
     FirebaseDatabase database;
     DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_roomtypeactivity);
-        hotelname=getIntent().getStringExtra("hotelpass");
+        setContentView(R.layout.activity_hotellist);
+        hkind=getIntent().getStringExtra("hkindpass");
         database=FirebaseDatabase.getInstance();
-        roomtypeAdapter=new RoomtypeAdapter(getApplicationContext(),roomtypegettersetters,hotelname);
-        recyclerView=findViewById(R.id.roomtyperecycler);
+        hoteldetailAdapter=new HoteldetailAdapter(getApplicationContext(),hoteldetailList);
+        recyclerView=findViewById(R.id.hotelrecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.hasFixedSize();
-        reference=database.getReference().child("HotelDetails").child("Hotels").child(hotelname).child("RoomTypes");
+        reference=database.getReference().child("Hoteltypes").child(hkind);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                roomtypegettersetters.clear();
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Roomtypegettersetter roomtypegettersetter = dataSnapshot.getValue(Roomtypegettersetter.class);
-                    roomtypegettersetters.add(roomtypegettersetter);
-                    Log.d("Data","RoomTypes:"+roomtypegettersetter);
+                hoteldetailList.clear();
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    Hoteldetail hoteldetail=dataSnapshot.getValue(Hoteldetail.class);
+                    hoteldetailList.add(hoteldetail);
                 }
-                recyclerView.setAdapter(roomtypeAdapter);
-                roomtypeAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(hoteldetailAdapter);
+                hoteldetailAdapter.notifyDataSetChanged();
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-    }}
+    }
+}

@@ -5,7 +5,7 @@
     android:id="@+id/cs"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/language_selection_background"
+    android:background="@drawable/splashscreenmain"
     tools:context=".SplashScreen">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,13 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MyBookingsFragment">
+    tools:context=".MyBookingsFragment"
+    android:paddingTop="40dp"
+    android:paddingBottom="60dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reservehistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="25dp"
+        android:paddingTop="30dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="16dp"
+        android:layout_margin="9dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -26,8 +26,8 @@ import java.util.List;
 
 public class HotelsFragment extends Fragment {
     RecyclerView recyclerView;
-    List<Hoteldetail> hoteldetailList= new ArrayList<>();
-    HoteldetailAdapter hoteldetailAdapter;
+    List<HotelKindGS> hotelKindGSList=new ArrayList<>();
+    Hotelkindadapter hotelkindadapter;
     FirebaseDatabase database;
     DatabaseReference reference;
 
@@ -41,21 +41,21 @@ public class HotelsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         database=FirebaseDatabase.getInstance();
-        recyclerView=view.findViewById(R.id.hotelsrecycler);
-        hoteldetailAdapter=new HoteldetailAdapter(getContext(),hoteldetailList);
+        recyclerView=view.findViewById(R.id.hotelkindrecycler);
+        hotelkindadapter=new Hotelkindadapter(getContext(),hotelKindGSList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.hasFixedSize();
-        reference=database.getReference().child("HotelDetails").child("Hotels");
+        reference=database.getReference().child("types");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                hoteldetailList.clear();
+                hotelKindGSList.clear();
                 for (DataSnapshot snapshot1:snapshot.getChildren()){
-                    Hoteldetail hoteldetail=snapshot1.getValue(Hoteldetail.class);
-                    hoteldetailList.add(hoteldetail);
+                    HotelKindGS hotelKindGS=snapshot1.getValue(HotelKindGS.class);
+                    hotelKindGSList.add(hotelKindGS);
                 }
-                recyclerView.setAdapter(hoteldetailAdapter);
-                hoteldetailAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(hotelkindadapter);
+                hotelkindadapter.notifyDataSetChanged();
             }
 
             @Override

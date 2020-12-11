@@ -10,7 +10,7 @@ import com.google.android.gms.maps.model.Marker;
 
 public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
     Hoteldetail hoteldetail;
-    Roomtypegettersetter roomtypegettersetter;
+    RoomGS roomtypegettersetter;
     LayoutInflater layoutInflater;
     Context context;
 

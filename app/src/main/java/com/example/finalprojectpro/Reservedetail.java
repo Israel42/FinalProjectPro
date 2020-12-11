@@ -29,12 +29,12 @@ import com.squareup.picasso.Picasso;
 
 public class Reservedetail extends AppCompatActivity {
     ImageView detailimage,barcode;
-    TextView detailname,detailroom,checkindetail,checkoutdetail,code;
+    TextView detailname,detailroom,checkindetail,checkoutdetail,code,rtype;
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference reference;
     Reservationdetail reservationdetail;
-    String passc,hop;
+    String passc,hop , hkind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,35 +42,35 @@ public class Reservedetail extends AppCompatActivity {
         setContentView(R.layout.activity_reservedetail);
         detailimage=findViewById(R.id.reservedhoteldetailimage);
         barcode=findViewById(R.id.barcodeview);
-        database=FirebaseDatabase.getInstance();
-        Log.d("handw", "onCreate: "+barcode.getWidth()+"    "+barcode.getHeight());
         detailname=findViewById(R.id.reservedhoteldetailname);
         detailroom=findViewById(R.id.reservedroomdetailname);
         checkindetail=findViewById(R.id.detailcheckin);
         checkoutdetail=findViewById(R.id.detailcheckout);
         code=findViewById(R.id.bookcode);
+        rtype.findViewById(R.id.reservedroomtype);
         passc=getIntent().getStringExtra("codepass");
         code.setText(passc);
+       database=FirebaseDatabase.getInstance();
         displaybitmap(passc);
-        Log.d("passc", "onCreate: "+passc);
         auth=FirebaseAuth.getInstance();
         String uid=auth.getCurrentUser().getUid();
-       reference=database.getReference().child("HotelDetails").child("MyReservation").child(uid).child(passc);
+        reference=database.getReference().child("Hoteltypes").child("OwnReservation").child(uid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reservationdetail=snapshot.getValue(Reservationdetail.class);
                 hop=reservationdetail.getReservedhotel();
                 detailname.setText(hop);
-                detailroom.setText(String.valueOf(reservationdetail.getReservedroomtype()));
+                hkind=reservationdetail.getReservedhkind();
+                detailroom.setText(String.valueOf(reservationdetail.getReservednoofroom()));
+                rtype.setText(String.valueOf(reservationdetail.getReservedroomtype()));
                 checkindetail.setText(String.valueOf(reservationdetail.getIndate()));
                 checkoutdetail.setText(String.valueOf(reservationdetail.getOutdate()));
-                DatabaseReference reference1=database.getReference().child("HotelDetails").child("Hotels").child(hop);
+                DatabaseReference reference1=database.getReference().child("Hoteltypes").child(hkind).child(hop);
                 reference1.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Detail detail=snapshot.getValue(Detail.class);
-                        Log.d("value", "onDataChange: "+detail.getImagepath());
                         Picasso.get().load(detail.getImagepath()).fit().into(detailimage);
                     }
 
@@ -87,9 +87,6 @@ public class Reservedetail extends AppCompatActivity {
         });
 
     }
-
-
-
     private void displaybitmap(String passc) {
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {

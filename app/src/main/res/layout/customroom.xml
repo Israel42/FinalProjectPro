@@ -55,12 +55,6 @@
                     android:fontFamily="sans-serif-black"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/Avalabile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textColor="#0751D3" />
 
                 <Button
                     android:id="@+id/roombook"

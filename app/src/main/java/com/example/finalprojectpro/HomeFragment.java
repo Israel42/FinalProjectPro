@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -44,12 +45,7 @@ public class HomeFragment extends Fragment {
     TextView username;
     ImageView location;
     Animation slide;
-    TabLayout tab;
-    RecyclerView recyclerView;
-    List<Reservationdetail> reservationdetailList=new ArrayList<>();
-    RecentHotels recentHotels;
-    FirebaseDatabase database;
-    DatabaseReference reference;
+    private DocumentSnapshot documentSnapshot;
 
 
     public static final int PERMISSION_CODE=99;
@@ -68,7 +64,6 @@ public class HomeFragment extends Fragment {
         slide = AnimationUtils.loadAnimation(getContext(), R.anim.slide);
         username = view.findViewById(R.id.username);
         location = view.findViewById(R.id.location);
-        tab = view.findViewById(R.id.tablayout);
         username.setAnimation(slide);
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -81,34 +76,24 @@ public class HomeFragment extends Fragment {
             }
         });
         PrefManager manager = new PrefManager(getActivity());
-        username.setText(String.format("Hi %s", manager.getusername()));
-        database=FirebaseDatabase.getInstance();
-        recyclerView=view.findViewById(R.id.visitedhotels);
-        recentHotels=new RecentHotels(getContext(),reservationdetailList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.hasFixedSize();
-        FirebaseAuth auth=FirebaseAuth.getInstance();
-        String i=auth.getCurrentUser().getUid();
-        reference=database.getReference().child("HotelDetails").child("MyReservation").child(i);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                reservationdetailList.clear();
-                for (DataSnapshot snapshot1:snapshot.getChildren()){
-                    Reservationdetail reservationdetail=snapshot1.getValue(Reservationdetail.class);
-                    reservationdetailList.add(reservationdetail);
-                }
-                recyclerView.setAdapter(recentHotels);
-                recentHotels.notifyDataSetChanged();
-            }
+        String mn=String.format("Hi %s", manager.getusername());
+        username.setText(mn);
+        FirebaseAuth auth;
 
+        auth=FirebaseAuth.getInstance();
+        String id=auth.getCurrentUser().getUid();
+        DocumentReference documentReference=FirebaseFirestore.getInstance().collection("Users").document(id);
+        if (mn=="Hi null"){
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                 documentSnapshot=task.getResult();
+                 if (documentSnapshot.exists()){
+                     username.setText(documentSnapshot.get("FirstName").toString());
+                 }
             }
         });
-
-
+        }
     }
 
     public boolean CheckPermission(){
