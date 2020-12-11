@@ -262,28 +262,27 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void seeinfoWindow(Marker marker) {
         cardView.setVisibility(View.VISIBLE);
         String hotelname = marker.getTitle();
-        final String hkind;
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("mapref").child(hotelname);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Hoteldetail hotelDetail = snapshot.getValue(Hoteldetail.class);
-                hkind=hotelDetail.getKind().toString();
+                String  hkind = hotelDetail.getKind();
                 hotelnameview.setText(hotelDetail.getName());
                 ratingBar.setRating(hotelDetail.getRating());
                 Picasso.get().load(hotelDetail.getImagepath()).fit().into(hotelimage);
-
-            }
-            checkAvailability.setOnClickListener(new View.OnClickListener() {
+                checkAvailability.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String n=hoteldetail.getName().toString();
+                    String n=hoteldetail.getName();
                     Intent intent=new Intent(getApplicationContext(),Booking.class);
                     intent.putExtra("hotelpass",n);
                     intent.putExtra("hkindpass",hkind);
                     startActivity(intent);
                 }
             });
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

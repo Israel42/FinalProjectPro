@@ -184,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
                 android:text="@string/check_availability"
-                android:textColor="#373D5E"/>
+                android:textColor="#FFFFFF"/>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
