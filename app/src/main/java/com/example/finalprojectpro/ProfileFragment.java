@@ -64,7 +64,7 @@ public class ProfileFragment extends Fragment {
                     nameview.setText(String.format("%s %s", documentSnapshot.get("FirstName").toString(), documentSnapshot.get("LastName").toString()));
                     phoneview.setText(documentSnapshot.get("PhoneNumber").toString());
                 }
-                    Picasso.get().load(documentSnapshot.get("ImageUrl").toString()).transform(new CropCircleTransformation()).fit().into(profilepic);
+                 //   Picasso.get().load(documentSnapshot.get("ImageUrl").toString()).transform(new CropCircleTransformation()).fit().into(profilepic);
 
             }
         });
