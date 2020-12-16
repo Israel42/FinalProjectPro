@@ -191,13 +191,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onClick(View view) {
         rippleBackground.startRippleAnimation();
         linearLayout.setVisibility(View.VISIBLE);
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Hoteltypes").child("Location");
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Location");
         final GeoFire geoFire=new GeoFire(reference);
         final GeoQuery geoQuery=geoFire.queryAtLocation(userLocation,3);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
-                final DatabaseReference  databaseReference=FirebaseDatabase.getInstance().getReference().child("Hoteltypes").child("Location").child(key);
+                final DatabaseReference  databaseReference=FirebaseDatabase.getInstance().getReference().child("mapref").child(key);
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -268,7 +268,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Hoteldetail hotelDetail = snapshot.getValue(Hoteldetail.class);
-                String  hkind = hotelDetail.getKind();
+                final String  hkind = hotelDetail.getKind();
                 hotelnameview.setText(hotelDetail.getName());
                 ratingBar.setRating(hotelDetail.getRating());
                 Picasso.get().load(hotelDetail.getImagepath()).fit().into(hotelimage);
