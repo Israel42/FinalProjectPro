@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.style.TtsSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -21,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -139,36 +142,43 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
         });
 
         checkout.setOnClickListener(new View.OnClickListener() {
-            Calendar calendar = Calendar.getInstance();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
 
             @Override
             public void onClick(View v) {
-                datePickerDialog = new DatePickerDialog(FinalPayment.this, new DatePickerDialog.OnDateSetListener() {
-                    @SuppressLint("DefaultLocale")
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        checkout.setText(String.format("%d/%d/%d", dayOfMonth, month+1, year));
-                        date2 = checkout.getText().toString();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                        try {
-                            checkoutdate = simpleDateFormat.parse(checkout.getText().toString());
-                            calendar2 = new GregorianCalendar();
-                            calendar2.setTime(checkoutdate);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                Calendar cl = Calendar.getInstance();
+                int year = cl.get(Calendar.YEAR);
+                int month = cl.get(Calendar.MONTH);
+                int day = cl.get(Calendar.DAY_OF_MONTH);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    datePickerDialog = new DatePickerDialog(FinalPayment.this, new DatePickerDialog.OnDateSetListener() {
+                        @SuppressLint("DefaultLocale")
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            checkout.setText(String.format("%d/%d/%d", dayOfMonth, month + 1, year));
+                            date2 = checkout.getText().toString();
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                            try {
+                                checkoutdate = simpleDateFormat.parse(checkout.getText().toString());
+                                calendar2 = new GregorianCalendar();
+                                calendar2.setTime(checkoutdate);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            int valueend = getdaybetween(calendar1.getTime(), calendar2.getTime());
+                            int piceof = Integer.parseInt(getIntent().getStringExtra("pricepass"));
+                            int finalprice = valueend * piceof;
+                            price.setText(String.valueOf(finalprice) + "ETB");
                         }
-                        int valueend = getdaybetween(calendar1.getTime(), calendar2.getTime());
-                        int piceof = Integer.parseInt(getIntent().getStringExtra("pricepass"));
-                        int finalprice = valueend * piceof;
-                        price.setText(String.valueOf(finalprice) + "ETB");
-                    }
-                }, year, month, day);
-                datePickerDialog.getDatePicker().setMinDate(cout + (1000 * 60 * 60 * 24));
-                datePickerDialog.getDatePicker().setMaxDate(cout + (1000 * 60 * 60 * 24 * 30));
-                datePickerDialog.show();
+                    }, year, month, day);
+                    /*
+                    *it crashs because of versions isru it needs a specific version if steatement wuste asgebechelehalewu
+                    *again it crashs this time is the intent pricepass intent you passed ETB to it so it doesn't change letter string to int so esun mastekakel new anyways sertual
+
+                     */
+                    datePickerDialog.getDatePicker().setMinDate(cout + (1000 * 60 * 60 * 24) );
+                    datePickerDialog.getDatePicker().setMaxDate(cout + (1000 * 60 *  60 * 24 * 14));
+                    datePickerDialog.show();
+                }
             }
         });
         pay.setOnClickListener(this);
@@ -189,6 +199,10 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+    }
+
+    private Calendar.Builder limitrange() {
+        return null;
     }
 
     @Override
