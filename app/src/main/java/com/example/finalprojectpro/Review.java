@@ -5,7 +5,9 @@ import android.widget.RatingBar;
 public class Review {
     String reviewer, review, timestamp;
     float reviewbar;
+           public Review(){
 
+          }
     public Review(String reviewer, String review, String timestamp, float reviewbar) {
         this.reviewer = reviewer;
         this.review = review;
