@@ -63,8 +63,8 @@
 
             <ImageView
                 android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/box"
                 android:backgroundTint="#7971727B"
                 android:padding="12dp"

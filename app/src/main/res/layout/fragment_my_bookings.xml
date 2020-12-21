@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MyBookingsFragment"
+    android:paddingBottom="60dp"
     android:paddingTop="40dp"
-    android:paddingBottom="60dp">
+    android:layout_marginTop="40dp">
+    <TextView
+        android:id="@+id/cpe"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#00695C"
+        android:gravity="center"
+        android:text="@string/your_bookings"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reservehistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="30dp"
+        android:paddingTop="10dp"
         android:paddingBottom="5dp"
-        android:layout_marginTop="16dp"
-        android:layout_margin="9dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginBottom="9dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/cpe"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

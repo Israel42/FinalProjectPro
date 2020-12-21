@@ -1,5 +1,6 @@
 package com.example.finalprojectpro;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +33,7 @@ public class MyBookingsFragment extends Fragment {
     ReservaitondetailAdapter reservaitondetailAdapter;
     FirebaseDatabase database;
     DatabaseReference reference;
+    String pkey;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,17 +47,18 @@ public class MyBookingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         reserve=view.findViewById(R.id.reservehistory);
         database=FirebaseDatabase.getInstance();
-        reservaitondetailAdapter=new ReservaitondetailAdapter(getContext(),reservationdetails);
-        reserve.setLayoutManager(new LinearLayoutManager(getContext()));
-        reserve.hasFixedSize();
         FirebaseAuth auth=FirebaseAuth.getInstance();
         String uid=auth.getCurrentUser().getUid();
         reference=database.getReference().child("Hoteltypes").child("OwnReservation").child(uid);
+        reservaitondetailAdapter=new ReservaitondetailAdapter(getContext(),reservationdetails);
+        reserve.setLayoutManager(new LinearLayoutManager(getContext()));
+        reserve.hasFixedSize();
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reservationdetails.clear();
                     for (DataSnapshot snapshot1:snapshot.getChildren()){
+
                         Log.d("Values", "onDataChange: "+snapshot1.getValue().toString());
                         Reservationdetail reservationdetail=snapshot1.getValue(Reservationdetail.class);
                         reservationdetails.add(reservationdetail);

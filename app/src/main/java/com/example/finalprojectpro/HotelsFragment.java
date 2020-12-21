@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +31,7 @@ public class HotelsFragment extends Fragment {
     Hotelkindadapter hotelkindadapter;
     FirebaseDatabase database;
     DatabaseReference reference;
+    HotelKindGS hotelKindGS;
 
     @Nullable
     @Override
@@ -51,11 +53,12 @@ public class HotelsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 hotelKindGSList.clear();
                 for (DataSnapshot snapshot1:snapshot.getChildren()){
-                    HotelKindGS hotelKindGS=snapshot1.getValue(HotelKindGS.class);
+                    hotelKindGS=snapshot1.getValue(HotelKindGS.class);
                     hotelKindGSList.add(hotelKindGS);
                 }
                 recyclerView.setAdapter(hotelkindadapter);
                 hotelkindadapter.notifyDataSetChanged();
+
             }
 
             @Override

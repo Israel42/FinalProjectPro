@@ -5,18 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Roomkindlist"
+
     >
+
+    <TextView
+        android:id="@+id/cho"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00695C"
+        android:gravity="center"
+        android:text="Choose Room Type"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/roomkindrecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="9dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="9dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/cho"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

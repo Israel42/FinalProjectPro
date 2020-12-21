@@ -4,7 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="reserved_hotel">Reserved Hotel</string>
     <string name="duration">Duration</string>
-    <string name="choose_room_type">Choose Room Type</string>
+    <string name="choose_room">Choose Room Type</string>
     <string name="how_many_rooms_do_you_want">How many rooms do you want?</string>
     <string name="channel_name" translatable="false">Channel 1</string>
     <string name="default_notification_channel_id" translatable="false">Channel 2</string>
@@ -47,4 +47,9 @@
     <string name="details">Detail</string>
     <string name="checkin">Checkin</string>
     <string name="finish">Finish</string>
+    <string name="Select">Select</string>
+    <string name="choose_hotel">Choose Hotel</string>
+    <string name="reviews_list">Reviews List</string>
+    <string name="choose_hotel_type">Choose Hotel Type</string>
+    <string name="your_bookings">Your Bookings</string>
 </resources>

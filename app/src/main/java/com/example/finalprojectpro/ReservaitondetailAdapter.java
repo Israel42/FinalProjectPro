@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class ReservaitondetailAdapter extends RecyclerView.Adapter<Reservaitonde
         holder.passcode.setText(reservationdetails.get(position).getGeneratedcode());
     holder.reserved_hotel.setText(reservationdetails.get(position).getReservedhotel());
     holder.room_type.setText(reservationdetails.get(position).getReservedroomtype());
-    holder.detailres.setOnClickListener(new View.OnClickListener() {
+    holder.cardView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             String reshot=holder.passcode.getText().toString();
@@ -42,6 +43,8 @@ public class ReservaitondetailAdapter extends RecyclerView.Adapter<Reservaitonde
             view.getContext().startActivity(intent);
         }
     });
+
+
     }
 
     @Override
@@ -51,14 +54,15 @@ public class ReservaitondetailAdapter extends RecyclerView.Adapter<Reservaitonde
     }
 
     public class viewholder extends RecyclerView.ViewHolder{
-        TextView reserved_hotel,room_type,detailres,passcode;
+        TextView reserved_hotel,room_type,passcode;
+        CardView cardView;
 
         public viewholder(View itemView){
             super(itemView);
         reserved_hotel=itemView.findViewById(R.id.reservedhotel_names);
         room_type=itemView.findViewById(R.id.reservedroomtype);
-        detailres=itemView.findViewById(R.id.detailreserv);
         passcode=itemView.findViewById(R.id.invistext);
+        cardView=itemView.findViewById(R.id.reservcardview);
         }
 
     }

@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +16,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,8 +47,8 @@ public class Reviews extends AppCompatActivity {
     EditText userreview;
     ImageView submit;
     RatingBar userhotelrate;
-    float rate;
-    String reviews,reviewer;
+   float rate;
+     String reviews,reviewer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,13 +67,16 @@ public class Reviews extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reviewList.clear();
-                if(snapshot.exists()){
+                if(snapshot.hasChildren()){
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    Log.d("Values", "onDataChange: "+dataSnapshot.getValue().toString());
                     Review review=dataSnapshot.getValue(Review.class);
                     reviewList.add(review);
+
                 }
-                recyclerView.setAdapter(reviewsAdapter);
-                reviewsAdapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(reviewsAdapter);
+                    reviewsAdapter.notifyDataSetChanged();
+
             }else{
                     Toast.makeText(Reviews.this, "No reviews yet! Feel free to add.", Toast.LENGTH_LONG).show();
                 }
@@ -81,8 +87,7 @@ public class Reviews extends AppCompatActivity {
 
             }
         });
-        rate=userhotelrate.getRating();
-        reviews=userreview.getText().toString();
+
         auth=FirebaseAuth.getInstance();
         String id=auth.getCurrentUser().getUid();
         final DocumentReference documentReference= FirebaseFirestore.getInstance().collection("Users").document(id);
@@ -98,8 +103,11 @@ public class Reviews extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(userreview!=null && userhotelrate!=null){
+                    rate=userhotelrate.getRating();
+                    reviews=userreview.getText().toString();
                     Review review=new Review(reviewer,reviews,date,rate);
                     reference.push().setValue(review);
+
                 }
             }
         });

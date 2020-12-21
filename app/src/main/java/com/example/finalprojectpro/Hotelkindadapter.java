@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class Hotelkindadapter extends RecyclerView.Adapter<Hotelkindadapter.view
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
 
         holder.hotelkind.setText(hotelKindGSList.get(position).getKind());
-        holder.select.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(view.getContext(),Hotellist.class);
@@ -43,6 +44,7 @@ public class Hotelkindadapter extends RecyclerView.Adapter<Hotelkindadapter.view
                 view.getContext().startActivity(intent);
             }
         });
+
     }
 
     @Override
@@ -52,11 +54,11 @@ public class Hotelkindadapter extends RecyclerView.Adapter<Hotelkindadapter.view
 
     public class viewholder extends RecyclerView.ViewHolder {
         TextView hotelkind;
-        Button select;
+        CardView cardView;
         public viewholder(@NonNull View itemView) {
             super(itemView);
             hotelkind=itemView.findViewById(R.id.hotelkindname);
-            select=itemView.findViewById(R.id.selecthotelkind);
+            cardView=itemView.findViewById(R.id.hkcard);
         }
     }
 }
