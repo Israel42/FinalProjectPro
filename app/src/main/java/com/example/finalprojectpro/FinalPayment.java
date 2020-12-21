@@ -59,6 +59,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
     static final String ab="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static SecureRandom random=new SecureRandom();
     long cout;
+    Date chin,chout,ind,oud;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -170,11 +171,6 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                             price.setText(String.valueOf(finalprice) + "ETB");
                         }
                     }, year, month, day);
-                    /*
-                    *it crashs because of versions isru it needs a specific version if steatement wuste asgebechelehalewu
-                    *again it crashs this time is the intent pricepass intent you passed ETB to it so it doesn't change letter string to int so esun mastekakel new anyways sertual
-
-                     */
                     datePickerDialog.getDatePicker().setMinDate(cout + (1000 * 60 * 60 * 24) );
                     datePickerDialog.getDatePicker().setMaxDate(cout + (1000 * 60 *  60 * 24 * 14));
                     datePickerDialog.show();
@@ -209,6 +205,14 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         checkinroom = checkin.getText().toString();
         checkoutroom = checkout.getText().toString();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            chin=dateFormat.parse(checkinroom);
+            chout=dateFormat.parse(checkoutroom);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         if (checkinroom.isEmpty()) {
             checkin.setError("Please add check in date");
             checkin.setFocusable(true);
@@ -220,6 +224,50 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
+        DatabaseReference check=database.getReference().child("Hoteltypes").child(hkind).child(hotel).child("Reserved");
+        check.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    for (DataSnapshot snapshot1:snapshot.getChildren()){
+                    Reservationdetail reservationdetail=snapshot1.getValue(Reservationdetail.class);
+                    try {
+                      ind=dateFormat.parse(reservationdetail.getIndate());
+                      oud=dateFormat.parse(reservationdetail.getOutdate());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    if (chin.compareTo(ind)==0){
+                        Toast.makeText(FinalPayment.this, "Sorry this room is reserved! It will be free on: "+oud, Toast.LENGTH_LONG).show();
+                        break;
+                    }else if (chin.after(ind)&&chin.before(oud)){
+                        Toast.makeText(FinalPayment.this, "Sorry this room is reserved! It will be free on: "+oud, Toast.LENGTH_LONG).show();
+                        break;
+                    }else if (chout.after(ind)&&chout.before(oud)){
+                        Toast.makeText(FinalPayment.this, "Sorry this room is reserved! You can reserve till: "+ind, Toast.LENGTH_LONG).show();
+                        break;
+                    }else {
+                        up();
+                        break;
+                    }
+                }
+                }else {
+                    up();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+    }
+
+    public void up(){
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String UID = auth.getCurrentUser().getUid();
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Users").document(UID);
@@ -232,14 +280,16 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                     phone = documentSnapshot.get("PhoneNumber").toString();
                     checkinroom = checkin.getText().toString();
                     checkoutroom = checkout.getText().toString();
-                    randomcode=generatedcode.getText().toString();
+                    randomcode = generatedcode.getText().toString();
                     tp = price.getText().toString();
-                    Reservationdetail reservationdetail = new Reservationdetail(name, phone,hkind, hotel, roomtypename, rname, checkinroom, checkoutroom, randomcode, tp);
                     DatabaseReference databaseReference2 = database.getReference().child("Hoteltypes").child(hkind).child(hotel).child("Reserved");
-                    databaseReference2.child(randomcode).setValue(reservationdetail);
                     DatabaseReference myreservation = database.getReference().child("Hoteltypes").child("OwnReservation");
+                    Reservationdetail reservationdetail = new Reservationdetail(name, phone, hkind, hotel, roomtypename, rname, checkinroom, checkoutroom, randomcode, tp);
+
+                    databaseReference2.child(randomcode).setValue(reservationdetail);
+
                     String Uid = auth.getCurrentUser().getUid();
-                    myreservation.child(Uid).push().setValue(reservationdetail);
+                    myreservation.child(Uid).child(randomcode).setValue(reservationdetail);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }

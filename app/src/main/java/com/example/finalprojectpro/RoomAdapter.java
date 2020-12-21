@@ -45,10 +45,11 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.viewholder> {
         @Override
         public void onClick(View view) {
         Intent intent=new Intent(view.getContext(),FinalPayment.class);
+        String p=String.valueOf(roomGSList.get(position).getPrice());
         intent.putExtra("hkindpass",hkind);
         intent.putExtra("hotelpass",hname);
         intent.putExtra("rkindpass",rkind);
-        intent.putExtra("pricepass",holder.pricer.getText().toString());
+        intent.putExtra("pricepass",p);
         intent.putExtra("roompass",holder.roomnum.getText().toString());
         view.getContext().startActivity(intent);
         }

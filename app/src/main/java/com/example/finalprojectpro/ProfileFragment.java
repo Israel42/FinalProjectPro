@@ -24,12 +24,15 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.util.Locale;
+
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class ProfileFragment extends Fragment {
     TextView nameview,phoneview;
     ImageView profilepic;
-    Button logout;
+
+    Button logout,englishlang,amhariclang;
     FirebaseAuth auth;
     private DocumentSnapshot documentSnapshot;
 
@@ -49,6 +52,8 @@ public class ProfileFragment extends Fragment {
         phoneview=view.findViewById(R.id.phonview);
         profilepic=view.findViewById(R.id.pro_pic);
         logout=view.findViewById(R.id.logout);
+        englishlang=view.findViewById(R.id.englishlang);
+        amhariclang=view.findViewById(R.id.amhariclang);
         nameview.setClickable(false);
         nameview.setInputType(InputType.TYPE_NULL);
         phoneview.setClickable(false);
@@ -75,5 +80,22 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(getContext(),LoginPage.class));
             }
         });
+        englishlang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrefManager prefManager=new PrefManager(getContext());
+                String language="en";
+                prefManager.updatelanguage(language);
+            }
+        });
+        amhariclang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrefManager prefManager=new PrefManager(getContext());
+                String language1="aa";
+                prefManager.updatelanguage(language1);
+            }
+        });
     }
+
 }

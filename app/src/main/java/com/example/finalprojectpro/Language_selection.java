@@ -57,11 +57,5 @@ public class Language_selection extends AppCompatActivity {
 
 
     }
-    public void Languagesetting(){
-        language.setChecked(true);
-        Configuration configuration=new Configuration();
-        configuration.locale=locale;
-        getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
 
-    }
 }

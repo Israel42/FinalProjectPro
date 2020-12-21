@@ -77,6 +77,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener, View.OnClickListener {
+    private static final int REQUEST_PERMISSION = 99;
     GoogleMap map;
     LatLng mOrigin;
     LazyLoader lazyLoader;
@@ -142,17 +143,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map=googleMap;
-        manager=(LocationManager) getSystemService(LOCATION_SERVICE);
+        manager=(LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        String provider=manager.getBestProvider(new Criteria(),true);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            checkPermission();
             return;
         }
-        location=manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        location=manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         map.setMyLocationEnabled(true);
         map.getUiSettings().setMyLocationButtonEnabled(false);
         if (location!=null){
             onLocationChanged(location);
         }
-        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,10000,50,this);
+        manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,50000,50,this);
         CustomInfoWindow infoWindow=new CustomInfoWindow(getApplicationContext());
         map.setInfoWindowAdapter(infoWindow);
     }
@@ -169,7 +172,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .tilt(90)
                 .build();
         map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+    }
+    public boolean checkPermission(){
+        if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},REQUEST_PERMISSION);
+            return false; }return true;
     }
 
     @Override
@@ -191,7 +199,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onClick(View view) {
         rippleBackground.startRippleAnimation();
         linearLayout.setVisibility(View.VISIBLE);
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Location");
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Hoteltypes").child("Location");
         final GeoFire geoFire=new GeoFire(reference);
         final GeoQuery geoQuery=geoFire.queryAtLocation(userLocation,3);
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
@@ -269,13 +277,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Hoteldetail hotelDetail = snapshot.getValue(Hoteldetail.class);
                 final String  hkind = hotelDetail.getKind();
-                hotelnameview.setText(hotelDetail.getName());
+                final String n=hotelDetail.getName();
+                hotelnameview.setText(n);
                 ratingBar.setRating(hotelDetail.getRating());
                 Picasso.get().load(hotelDetail.getImagepath()).fit().into(hotelimage);
                 checkAvailability.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String n=hoteldetail.getName();
                     Intent intent=new Intent(getApplicationContext(),Booking.class);
                     intent.putExtra("hotelpass",n);
                     intent.putExtra("hkindpass",hkind);

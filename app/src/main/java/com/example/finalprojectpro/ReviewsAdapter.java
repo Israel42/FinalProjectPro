@@ -15,10 +15,7 @@ import java.util.List;
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.viewholder> {
     Context context;
     List<Review> reviewList;
-public ReviewsAdapter(List<Review> list,Context context){
-    this.reviewList=list;
-     this.context=context;
-}
+
 
     @NonNull
     @Override
@@ -37,7 +34,7 @@ public ReviewsAdapter(List<Review> list,Context context){
 
     @Override
     public int getItemCount() {
-        return reviewList.size();
+        return 0;
     }
 
     public class viewholder extends RecyclerView.ViewHolder{

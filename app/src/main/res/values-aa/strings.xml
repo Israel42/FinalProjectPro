@@ -36,7 +36,7 @@
     <string name="log_out">ውጣ</string>
     <string name="per_night">በአንድ ሌሊት</string>
     <string name="how_many_rooms_do_you_want">ምን ያህል ክፍል ይፈልጋሉ?</string>
-    <string name="choose_room_type">የክፍል አይነት ይምረጡ</string>
+    <string name="choose_room">ክፍል ይምረጡ</string>
     <string name="duration">የቆይታ ጊዜ</string>
     <string name="reserved_hotel">የተያዘው ሆቴል</string>
     <string name="details">ዝርዝር</string>
@@ -46,4 +46,9 @@
     <string name="select">ምረጥ</string>
     <string name="channel_name" translatable="false">Channel 1</string>
     <string name="default_notification_channel_id" translatable="false">Channel 2</string>
+    <string name="choose_hotel">ሆቴል ይምረጡl</string>
+    <string name="reviews_list">አስተያየቶች</string>
+    <string name="choose_hotel_type">የሆቴል አይነት ይምረጡ</string>
+    <string name="your_bookings">"የእርስዎ ማስያዣዎች "</string>
+    <string name="Select">ምረጥ</string>
 </resources>

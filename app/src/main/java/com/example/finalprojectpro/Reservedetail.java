@@ -29,7 +29,7 @@ import com.squareup.picasso.Picasso;
 
 public class Reservedetail extends AppCompatActivity {
     ImageView detailimage,barcode;
-    TextView detailname,detailroom,checkindetail,checkoutdetail,code,rtype;
+    TextView detailname,detailroom,checkindetail,checkoutdetail,code;
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -47,14 +47,13 @@ public class Reservedetail extends AppCompatActivity {
         checkindetail=findViewById(R.id.detailcheckin);
         checkoutdetail=findViewById(R.id.detailcheckout);
         code=findViewById(R.id.bookcode);
-        rtype.findViewById(R.id.reservedroomtype);
         passc=getIntent().getStringExtra("codepass");
-        code.setText(passc);
+       code.setText(passc);
        database=FirebaseDatabase.getInstance();
-        displaybitmap(passc);
+       displaybitmap(passc);
         auth=FirebaseAuth.getInstance();
         String uid=auth.getCurrentUser().getUid();
-        reference=database.getReference().child("Hoteltypes").child("OwnReservation").child(uid);
+        reference=database.getReference().child("Hoteltypes").child("OwnReservation").child(uid).child(passc);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -62,11 +61,10 @@ public class Reservedetail extends AppCompatActivity {
                 hop=reservationdetail.getReservedhotel();
                 detailname.setText(hop);
                 hkind=reservationdetail.getReservedhkind();
-                detailroom.setText(String.valueOf(reservationdetail.getReservednoofroom()));
-                rtype.setText(String.valueOf(reservationdetail.getReservedroomtype()));
+                detailroom.setText(String.format("Reserved Room: %s",reservationdetail.getReservednoofroom()));
                 checkindetail.setText(String.valueOf(reservationdetail.getIndate()));
                 checkoutdetail.setText(String.valueOf(reservationdetail.getOutdate()));
-                DatabaseReference reference1=database.getReference().child("Hoteltypes").child(hkind).child(hop);
+                DatabaseReference reference1=database.getReference().child("mapref").child(hop);
                 reference1.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -90,9 +88,18 @@ public class Reservedetail extends AppCompatActivity {
     private void displaybitmap(String passc) {
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(passc, BarcodeFormat.CODE_128,barcode.getWidth(),barcode.getHeight());
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            BitMatrix bitMatrix = multiFormatWriter.encode(passc, BarcodeFormat.QR_CODE,500,500);
+            int w=bitMatrix.getWidth();
+            int h=bitMatrix.getHeight();
+            int[] p=new int[w*h];
+            for (int y=0;y<h;y++){
+                int offset=y*w;
+                for (int x=0;x<w;x++){
+                    p[offset+x]=bitMatrix.get(x,y) ? Color.BLACK : Color.WHITE;
+                }
+            }
+            Bitmap bitmap=Bitmap.createBitmap(w,h, Bitmap.Config.ARGB_8888);
+            bitmap.setPixels(p,0,w,0,0,w,h);
             barcode.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();

@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class Roomkindadaptor extends RecyclerView.Adapter<Roomkindadaptor.viewholder> {
@@ -35,7 +37,7 @@ public class Roomkindadaptor extends RecyclerView.Adapter<Roomkindadaptor.viewho
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
     holder.rkind.setText(roomKindGSList.get(position).getType());
-    holder.select.setOnClickListener(new View.OnClickListener() {
+    holder.cardView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Intent intent=new Intent(view.getContext(),Roomlist.class);
@@ -55,11 +57,12 @@ public class Roomkindadaptor extends RecyclerView.Adapter<Roomkindadaptor.viewho
 
     public class viewholder extends RecyclerView.ViewHolder{
             TextView rkind;
-            Button select;
+            CardView cardView;
         public viewholder(@NonNull View itemView) {
             super(itemView);
             rkind=itemView.findViewById(R.id.roomkindname);
-            select=itemView.findViewById(R.id.selectroomkind);
+            cardView=itemView.findViewById(R.id.rkcard);
+
         }
     }
 }

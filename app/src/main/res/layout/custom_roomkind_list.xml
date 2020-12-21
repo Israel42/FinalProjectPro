@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
+        android:id="@+id/rkcard"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         app:cardCornerRadius="25dp"
@@ -23,24 +24,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="9dp"
             android:textSize="25sp"
             android:padding="10dp"
             android:textStyle="bold"
             android:gravity="center"
             android:textColor="@color/white"
             />
-        <Button
-            android:id="@+id/selectroomkind"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/select"
-            android:background="@color/transparent"
-            android:textColor="#fff"
-            android:layout_gravity="bottom"
-            android:gravity="end"
-            android:layout_marginEnd="10dp"
-            />
+
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

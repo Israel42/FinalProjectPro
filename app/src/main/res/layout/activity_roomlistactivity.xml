@@ -13,26 +13,26 @@
         android:layout_height="50dp"
         android:background="#00695C"
         android:gravity="center"
-        android:text="@string/choose_room_type"
+        android:text="@string/choose_room"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-  <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/roomtyperecycler"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:layout_constraintTop_toBottomOf="@id/chooseroomtype"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      android:paddingTop="19dp"
-      android:layout_marginTop="10dp"
-      android:paddingStart="14dp"
-      android:paddingEnd="14dp"
-      android:paddingBottom="79dp"
-      />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/roomtyperecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="14dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="79dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chooseroomtype"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
