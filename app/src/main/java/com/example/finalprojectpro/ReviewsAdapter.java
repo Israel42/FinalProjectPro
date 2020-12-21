@@ -16,7 +16,10 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.viewhold
     Context context;
     List<Review> reviewList;
 
-
+      public ReviewsAdapter(List<Review> list ,Context context){
+          this.reviewList=list;
+          this.context=context;
+      }
     @NonNull
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,7 +37,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.viewhold
 
     @Override
     public int getItemCount() {
-        return 0;
+        return reviewList.size();
     }
 
     public class viewholder extends RecyclerView.ViewHolder{
