@@ -10,7 +10,7 @@ public class RequestNotification {
 
     public RequestNotification(String to, DataModel data) {
         this.to = to;
-        Data = data;
+        this.Data = data;
     }
 
     public String getTo() {

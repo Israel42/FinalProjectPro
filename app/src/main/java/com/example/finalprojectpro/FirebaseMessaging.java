@@ -10,6 +10,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -33,7 +34,9 @@ public class FirebaseMessaging extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         String name=remoteMessage.getData().get("title");
+        Log.d(Tag, "onMessageReceived: "+name);
         String body =remoteMessage.getData().get("body");
+        Log.d(Tag, "onMessageReceived: "+body);
         channelId=getString(R.string.default_notification_channel_id);
         notificationCompat=new NotificationCompat.Builder(this,channelId);
 
@@ -43,7 +46,6 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         PendingIntent pendingIntent=PendingIntent.getActivity(this,NOTIFICATION_ID,intent, PendingIntent.FLAG_ONE_SHOT);
 
         notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
         String channelName=getString(R.string.channel_name);
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         notificationCompat.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
@@ -66,7 +68,6 @@ public class FirebaseMessaging extends FirebaseMessagingService {
             notificationChannel.setLightColor(Color.MAGENTA);
             notificationChannel.enableVibration(true);
             notificationChannel.setVibrationPattern(new long[]{100,200,300,400,500,400,300,200,400});
-            assert  notificationManager !=null;
             notificationCompat.setChannelId(channelId);
             notificationManager.createNotificationChannel(notificationChannel);
         }

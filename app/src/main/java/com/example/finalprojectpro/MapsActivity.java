@@ -211,9 +211,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 documentSnapshot = task.getResult();
                 token=documentSnapshot.get("Token").toString();
                 Log.d("log",token);
+                SendNearByNotification(token,"hi","hellow");
             }
         });
-        SendNearByNotification(token,"Notifying","Why don't you visit this hotel near you");
+        SendNearByNotification("","Notifying","Why don't you visit this hotel near you");
 
         rippleBackground.startRippleAnimation();
         linearLayout.setVisibility(View.VISIBLE);
@@ -269,7 +270,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
                 Log.d("min",m);
-                if (m=="3"){
+                if (m.equals("3")){
                     SendNearByNotification(token,"Notifying","Why don't you visit this hotel near you");
                 }
 
@@ -348,6 +349,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     if (response.code()==200){
                         try{
                             Log.d("Response", "onResponse: "+response.body().string());
+
                         }catch (IOException e){
                             e.printStackTrace();
                         }
@@ -357,7 +359,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                    Log.d("val", "onFailure: "+t.getMessage());
                 }
             });
     }
