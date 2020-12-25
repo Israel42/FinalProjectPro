@@ -39,6 +39,7 @@ import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
+import com.firebase.geofire.util.GeoUtils;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -68,6 +69,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,6 +101,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     ViewFlipper viewFlipper;
     ImageView hotelimage,singleroomimage,doubleroomimage,suitroomimage;
     RatingBar ratingBar;
+    FirebaseAuth auth;
+    DocumentSnapshot documentSnapshot;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,6 +202,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onClick(View view) {
+        auth=FirebaseAuth.getInstance();
+        String id=auth.getCurrentUser().getUid();
+        final DocumentReference documentReference=FirebaseFirestore.getInstance().collection("Users").document(id);
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                documentSnapshot = task.getResult();
+                token=documentSnapshot.get("Token").toString();
+                Log.d("log",token);
+            }
+        });
+        SendNearByNotification(token,"Notifying","Why don't you visit this hotel near you");
+
         rippleBackground.startRippleAnimation();
         linearLayout.setVisibility(View.VISIBLE);
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Hoteltypes").child("Location");
@@ -233,9 +251,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     }
                 });
-                /*  ezi wuste calculate aderegewu for the nearest room then send notification..
-                   Double  double = GeoUtils.distance(userlocation, geoLocation(ye hotel location)) / 1000
-                   Decemalfromat decimalformat = DecimalFormat("#.##")// yeha wede decimal mekeyera new isru lemen asfelegen kalen wedezi format kalkeyerkewu double selhone yemate 0 yasayehal
+                /* ezi wuste calculate aderegewu for the nearest room then send notification..
+                  // Double  double = GeoUtils.distance(userlocation, geoLocation(ye hotel location)) / 1000;
+                    double des= GeoUtils.distance(userLocation,geo)
+                Decemalfromat decimalformat = DecimalFormat("#.##")// yeha wede decimal mekeyera new isru lemen asfelegen kalen wedezi format kalkeyerkewu double selhone yemate 0 yasayehal
                    yagenewun distance wede km endekeye madreg string or float metekem tecehalele
                    String mindistance=decimalformat.format(double).toString();
 
@@ -244,6 +263,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                       sendnotification(to,title,token) // token ke firestore ke user laye new metagenewu
                    }
                  */
+                double des=GeoUtils.distance(userLocation, new GeoLocation(location.latitude,location.longitude))/1000;
+                DecimalFormat decimalFormat= new DecimalFormat("#.##");
+                String m=decimalFormat.format(des).toString();
+
+
+                Log.d("min",m);
+                if (m=="3"){
+                    SendNearByNotification(token,"Notifying","Why don't you visit this hotel near you");
+                }
+
             }
 
             @Override

@@ -86,6 +86,7 @@ public class ProfileFragment extends Fragment {
                 PrefManager prefManager=new PrefManager(getContext());
                 String language="en";
                 prefManager.updatelanguage(language);
+                startActivity(new Intent(getContext(),MainActivity.class));
             }
         });
         amhariclang.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +95,7 @@ public class ProfileFragment extends Fragment {
                 PrefManager prefManager=new PrefManager(getContext());
                 String language1="aa";
                 prefManager.updatelanguage(language1);
+                startActivity(new Intent(getContext(),MainActivity.class));
             }
         });
     }

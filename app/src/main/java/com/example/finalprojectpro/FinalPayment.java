@@ -83,18 +83,16 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
         cbelogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cben="*889#";
                 Intent intent=new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:"+cben));
+                intent.setData(Uri.parse("tel:*889"+Uri.encode("#")));
                 startActivity(intent);
             }
         });
         birhanlogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String birn="*881#";
                 Intent intent=new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:"+birn));
+                intent.setData(Uri.parse("tel:*881"+Uri.encode("#")));
                 startActivity(intent);
             }
         });
@@ -103,7 +101,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 String amn="*996#";
                 Intent intent=new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:"+amn));
+                intent.setData(Uri.parse("tel:*996"+Uri.encode("#")));
                 startActivity(intent);
             }
         });
@@ -182,7 +180,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
         hotel = getIntent().getStringExtra("hotelpass");
         rname=getIntent().getStringExtra("roompass");
         hkind=getIntent().getStringExtra("hkindpass");
-        reference = database.getReference().child("Hoteltypes").child(hkind).child(hotel).child("Roomtypes").child(roomtypename).child(rname);
+        reference = database.getReference().child("Roomtypes").child(hkind).child(hotel).child(roomtypename).child(rname);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -285,9 +283,7 @@ public class FinalPayment extends AppCompatActivity implements View.OnClickListe
                     DatabaseReference databaseReference2 = database.getReference().child("Hoteltypes").child(hkind).child(hotel).child("Reserved");
                     DatabaseReference myreservation = database.getReference().child("Hoteltypes").child("OwnReservation");
                     Reservationdetail reservationdetail = new Reservationdetail(name, phone, hkind, hotel, roomtypename, rname, checkinroom, checkoutroom, randomcode, tp);
-
                     databaseReference2.child(randomcode).setValue(reservationdetail);
-
                     String Uid = auth.getCurrentUser().getUid();
                     myreservation.child(Uid).child(randomcode).setValue(reservationdetail);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));

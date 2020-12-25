@@ -60,7 +60,7 @@ public class Reviews extends AppCompatActivity {
         hkind=getIntent().getStringExtra("hkindpass");
         database=FirebaseDatabase.getInstance();
         recyclerView=findViewById(R.id.reviewrecycler);
-        reviewsAdapter=new ReviewsAdapter(reviewList,getApplicationContext());
+        reviewsAdapter=new ReviewsAdapter(getApplicationContext(),reviewList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.hasFixedSize();
         reference=database.getReference().child("Hoteltypes").child(hkind).child(hotelname).child("Reviews");

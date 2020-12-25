@@ -37,7 +37,7 @@ public class Roomlist extends AppCompatActivity {
         roomAdapter=new RoomAdapter(getApplicationContext(),roomGSList,hkind,hotelname,rkind);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.hasFixedSize();
-        reference=database.getReference().child("Hoteltypes").child(hkind).child(hotelname).child("Roomtypes").child(rkind);
+        reference=database.getReference().child("Roomtypes").child(hkind).child(hotelname).child(rkind);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

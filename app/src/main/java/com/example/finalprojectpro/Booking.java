@@ -65,34 +65,7 @@ public class Booking extends AppCompatActivity {
                 hotelnot.setText(hoteldetail.getNote());
                 rate.setText(String.valueOf(hoteldetail.getRating()));
                 Picasso.get().load(hoteldetail.getImagepath()).fit().into(imageView);
-                /*   DatabaseReference reference1=reference.child("RoomTypes");
-                DatabaseReference pricelowref=reference1.child("Single");
-                DatabaseReference pricehighref=reference1.child("Presidential");
-                pricelowref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        RoomGS roomtypegettersetter=snapshot.getValue(RoomGS.class);
-                        pricelow=String.valueOf(roomtypegettersetter.getPrice());
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-                pricehighref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        RoomGS roomtypegettersetter=snapshot.getValue(RoomGS.class);
-                        pricehigh=String.valueOf(roomtypegettersetter.getPrice());
-                        price.setText(String.format("%sETB-%sETB", pricelow, pricehigh));
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });*/
             }
 
             @Override
